@@ -61,12 +61,13 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-2-5 sentences describing what the system does
+The purpose of the application is to connect food truckers and food lovers. Today, there’s no solution where a consumer can go online and find where their favorite food truck is located in Göteborg. That’s where we come into play. The consumer should be able to search for available food trucks in the city and see their locations. From the other perspective, we want to enable food truck owners to post their location in the application, so that they can communicate their whereabouts to the consumers. We also aim to digitalize the location application process between the municipality and the food truck owner.
 
 ### Pages
 
-* Home: 1-3 sentences describing what the page displays and what a user can do
-* Shopping cart: ...
+Home Page: The home page will display the map of the city and also small truck symbols, showing the location of the food truck. The map will also display my current location as a small dot. As a consumer I will be able to search for a specific food truck in the search bar. The map will be interactive where the user can drag, zoom and click for more information. The home page will also display a list with summarized information about the food trucks.
+
+Food Truck Page: The food truck page will display information about the food truck. The information will consist of menus and prices, ingredients, story about the food truck and/or owner, ratings, comments etc. If I login as an owner, I will also be able to edit the information about my food truck and also link my social media.
 
 ### Entity-Relationship (ER) Diagram
 
