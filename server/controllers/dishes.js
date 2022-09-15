@@ -3,7 +3,7 @@ var router = express.Router();
 var Dish = require('../models/dish');
 
 // Create
-router.post('/api/dishes', function(req, res, next){
+router.post('/', function(req, res, next){
     var dish = new Dish(req.body);
     dish.save(function(err, dish) {
         if (err) { return next(err); }
@@ -12,7 +12,7 @@ router.post('/api/dishes', function(req, res, next){
 })
 
 // Delete by ID
-router.delete('/api/dishes/:_id', function (req, res, next) {
+router.delete('/:_id', function (req, res, next) {
     var id = req.params._id;
     Dish.findOneAndDelete({ _id: id }, function (err, dish) {
         if (err) { return next(err); }
@@ -24,7 +24,7 @@ router.delete('/api/dishes/:_id', function (req, res, next) {
 });
 
 // Delete all
-router.delete('/api/dishes/', function (req, res, next) {
+router.delete('/', function (req, res, next) {
     Dish.remove({}, function (err, dishes) {
         if (err) { return next(err); }
         if (dishes == null) {
@@ -35,7 +35,7 @@ router.delete('/api/dishes/', function (req, res, next) {
 });
 
 // Get by ID
-router.get('/api/dishes/:_id', function (req, res, next) {
+router.get('/:_id', function (req, res, next) {
     var id = req.params._id;
     Dish.findById(id, function (err, dishes) {
         if (err) { return next(err); }
@@ -47,7 +47,7 @@ router.get('/api/dishes/:_id', function (req, res, next) {
 });
 
 // Get all
-router.get('/api/dishes', function (req, res, next) {
+router.get('/', function (req, res, next) {
     Dish.find(function (err, dishes) {
         if (err) { return next(err); }
         res.json({ "dishes": dishes });
@@ -55,7 +55,7 @@ router.get('/api/dishes', function (req, res, next) {
 });
 
 // Patch by ID
-router.patch('/api/dishes/:_id', function (req, res, next) {
+router.patch('/:_id', function (req, res, next) {
     var id = req.params._id;
     Dish.findById(id, function (err, dishes) {
         if (err) { return next(err); }
