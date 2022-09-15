@@ -19,7 +19,7 @@ router.get('/api/customers', function (req, res, next) {
     if (err) {
       return next(err)
     }
-    res.json({ customers: customers })
+    res.json({ 'customers': customers })
   })
 })
 
@@ -51,6 +51,19 @@ router.delete('/api/customers/:id', function (req, res, next) {
   })
 })
 
-//TODO Update the customer with the given ID
+// Delete all customers from the database
+router.delete('/api/customers', function(req, res, next) {
+  Customer.deleteMany(function (err, customer) {
+    if (err) {
+      return next(err)
+    }
+    res.json(customer)
+  })
+}) 
+
+//TODO Update the entire customer with the given ID
+
+//TODO Update part of the customer with the given ID
+
 
 module.exports = router
