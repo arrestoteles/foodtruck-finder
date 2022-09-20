@@ -238,7 +238,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Correct status code\", function(){",
-							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(204);",
 							"});"
 						],
 						"type": "text/javascript"
