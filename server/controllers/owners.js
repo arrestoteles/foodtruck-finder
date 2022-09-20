@@ -3,8 +3,8 @@ var router = express.Router()
 var Owner = require('../models/owner')
 
 // Create a new owner
-router.post('/api/owners', function (req, res, next) {
-  var owner = new owner(req.body)
+router.post('/', function (req, res, next) {
+  var owner = new Owner(req.body)
   owner.save(function (err, owner) {
     if (err) {
       return next(err)
@@ -14,7 +14,7 @@ router.post('/api/owners', function (req, res, next) {
 })
 
 // Return a list of all owners
-router.get('/api/owners', function (req, res, next) {
+router.get('/', function (req, res, next) {
   Owner.find(function (err, owners) {
     if (err) {
       return next(err)
@@ -24,7 +24,7 @@ router.get('/api/owners', function (req, res, next) {
 })
 
 // Return the owners with the given ID
-router.get('/api/owners/:id', function (req, res, next) {
+router.get('/:_id', function (req, res, next) {
   var id = req.params.id
   Owner.findById(id, function (err, owner) {
     if (err) {
@@ -38,7 +38,7 @@ router.get('/api/owners/:id', function (req, res, next) {
 })
 
 // Delete the owner with the given ID
-router.delete('/api/owners/:id', function (req, res, next) {
+router.delete('/:_id', function (req, res, next) {
   var id = req.params.id
   Owner.findOneAndDelete({ _id: id }, function (err, owner) {
     if (err) {
@@ -52,7 +52,7 @@ router.delete('/api/owners/:id', function (req, res, next) {
 })
 
 // Delete all owners from the database
-router.delete('/api/owners', function(req, res, next) {
+router.delete('/', function(req, res, next) {
   Owner.deleteMany(function (err, owner) {
     if (err) {
       return next(err)
