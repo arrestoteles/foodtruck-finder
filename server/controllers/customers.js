@@ -1,4 +1,5 @@
 var express = require('express')
+const customer = require('../models/customer')
 var router = express.Router()
 var Customer = require('../models/customer')
 
@@ -8,7 +9,7 @@ router.get('/api/customers', function (req, res, next) {
     if (err) {
       return next(err)
     }
-    res.json({ 'customers': customers })
+    res.status(200).json({ 'customers': customers })
   })
 })
 
@@ -33,7 +34,7 @@ router.get('/api/customers/:id', function (req, res, next) {
     if (customer === null) {
       return res.status(404).json({ message: 'Customer not found' })
     }
-    res.json(customer)
+    res.status(200).json(customer)
   })
 })
 
@@ -47,7 +48,7 @@ router.delete('/api/customers/:id', function (req, res, next) {
     if (customer === null) {
       return res.status(404).json({ message: 'Customer not found' })
     }
-    res.json(customer)
+    res.status(200).json(customer)
   })
 })
 
@@ -57,13 +58,38 @@ router.delete('/api/customers', function(req, res, next) {
     if (err) {
       return next(err)
     }
-    res.json(customer)
+    res.status(200).json(customer)
   })
 }) 
 
-//TODO Update the entire customer with the given ID
+// Update the customer with given id
+router.put('/api/customers/:id', function(req, res, next) {
+    var id = req.params.id
+    Customer.findById(id, function(err, customer) {
+        if (err) { return next(err); }
+        if (customer == null) {
+            return res.status(404).json({"message": "Customer not found"})
+        }
+        customer.username = req.body.username
+        customer.password = req.body.password
+        customer.save()
+        res.status(204).json(customer)
+    })
+})
 
-//TODO Update part of the customer with the given ID
-
+// Partially update the customer with the given ID
+router.patch('/api/customers/:id', function(req, res, next) {
+  var id = req.params.id
+  Customer.findById(id, function(err, customer) {
+      if (err) { return next(err); }
+      if (customer == null) {
+          return res.status(404).json({"message": "Customer not found"})
+      }
+      customer.username = (req.body.username || customer.username)
+      customer.password = (req.body.password || customer.password)
+      customer.save()
+      res.status(204).json(customer)
+  })
+})
 
 module.exports = router
