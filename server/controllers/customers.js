@@ -9,7 +9,7 @@ router.post('/', function (req, res, next) {
     if (err) {
       return next(err)
     }
-    res.status(201).json(customer)
+    res.json({ 'customers': customers })
   })
 })
 
@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
     if (err) {
       return next(err)
     }
-    res.json({ 'customers': customers })
+    res.status(201).json(customer)
   })
 })
 

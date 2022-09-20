@@ -11,7 +11,7 @@ var dishesController = require('./controllers/dishes')
 
 // Variables
 var mongoURI =
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB'
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/foodtruckDB'
 var port = process.env.PORT || 3000
 
 // Connect to MongoDB
