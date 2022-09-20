@@ -2,9 +2,10 @@ var express = require('express')
 var router = express.Router()
 var Customer = require('../models/customer')
 
-// Return a list of all customers
-router.get('/api/customers', function (req, res, next) {
-  Customer.find(function (err, customers) {
+// Create a new customer
+router.post('/', function (req, res, next) {
+  var customer = new Customer(req.body)
+  customer.save(function (err, customer) {
     if (err) {
       return next(err)
     }
@@ -12,10 +13,9 @@ router.get('/api/customers', function (req, res, next) {
   })
 })
 
-// Create a new customer
-router.post('/api/customers', function (req, res, next) {
-  var customer = new Customer(req.body)
-  customer.save(function (err, customer) {
+// Return a list of all customers
+router.get('/', function (req, res, next) {
+  Customer.find(function (err, customers) {
     if (err) {
       return next(err)
     }
@@ -24,7 +24,7 @@ router.post('/api/customers', function (req, res, next) {
 })
 
 // Return the customers with the given ID
-router.get('/api/customers/:id', function (req, res, next) {
+router.get('/:_id', function (req, res, next) {
   var id = req.params.id
   Customer.findById(id, function (err, customer) {
     if (err) {
@@ -38,7 +38,7 @@ router.get('/api/customers/:id', function (req, res, next) {
 })
 
 // Delete the customer with the given ID
-router.delete('/api/customers/:id', function (req, res, next) {
+router.delete('/:_id', function (req, res, next) {
   var id = req.params.id
   Customer.findOneAndDelete({ _id: id }, function (err, customer) {
     if (err) {
@@ -52,7 +52,7 @@ router.delete('/api/customers/:id', function (req, res, next) {
 })
 
 // Delete all customers from the database
-router.delete('/api/customers', function(req, res, next) {
+router.delete('/', function(req, res, next) {
   Customer.deleteMany(function (err, customer) {
     if (err) {
       return next(err)

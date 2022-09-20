@@ -5,7 +5,7 @@ var path = require('path')
 var cors = require('cors')
 var history = require('connect-history-api-fallback')
 
-// Controller variables
+var ownerController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
 
@@ -43,9 +43,10 @@ app.use(cors())
 app.get('/api', function (req, res) {
   res.json({ message: 'Welcome to your DIT342 backend ExpressJS project!' })
 })
-
-app.use(customersController)
+app.use('/api/owners', ownerController)
+app.use('/api/customers', customersController)
 app.use('/api/dishes', dishesController)
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
