@@ -71,25 +71,15 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Correct customer response\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData).to.be.an(\"object\");",
-							"});"
+							""
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:3000/api/customers",
 					"protocol": "http",
@@ -150,7 +140,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "6321c4997a65a6068aead14b"
+							"value": "63297b58ad12401910a11544"
 						}
 					]
 				}
@@ -183,7 +173,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\" : \"arrestoteles\"\n}"
+					"raw": "{\n    \"username\" : \"arre\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/api/customers/:id",
@@ -200,7 +190,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63232891823c540fb73689bb"
+							"value": "63232880823c540fb73689b9"
 						}
 					]
 				}
@@ -235,6 +225,116 @@
 					"path": [
 						"api",
 						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update the customer with given id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"mr-robot\",\n    \"password\" : 321\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/customers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"customers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63297b56ad12401910a11542"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Partially update the customer with the given ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\" : \"my-new-password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/customers/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"customers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "63297b56ad12401910a11542"
+						}
 					]
 				}
 			},
