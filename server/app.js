@@ -5,12 +5,13 @@ var path = require('path')
 var cors = require('cors')
 var history = require('connect-history-api-fallback')
 
+// Controller variables
 var customersController = require('./controllers/customers')
-
 var dishesController = require('./controllers/dishes')
+
 // Variables
 var mongoURI =
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB'
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/foodtruckDB'
 var port = process.env.PORT || 3000
 
 // Connect to MongoDB
@@ -44,7 +45,6 @@ app.get('/api', function (req, res) {
 })
 
 app.use(customersController)
-
 app.use('/api/dishes', dishesController)
 
 // Catch all non-error handler for api (i.e., 404 Not Found)

@@ -2,6 +2,16 @@ var express = require('express')
 var router = express.Router()
 var Customer = require('../models/customer')
 
+// Return a list of all customers
+router.get('/api/customers', function (req, res, next) {
+  Customer.find(function (err, customers) {
+    if (err) {
+      return next(err)
+    }
+    res.json({ 'customers': customers })
+  })
+})
+
 // Create a new customer
 router.post('/api/customers', function (req, res, next) {
   var customer = new Customer(req.body)
@@ -10,16 +20,6 @@ router.post('/api/customers', function (req, res, next) {
       return next(err)
     }
     res.status(201).json(customer)
-  })
-})
-
-// Return a list of all customers
-router.get('/api/customers', function (req, res, next) {
-  Customer.find(function (err, customers) {
-    if (err) {
-      return next(err)
-    }
-    res.json({ 'customers': customers })
   })
 })
 
