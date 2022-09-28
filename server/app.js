@@ -44,7 +44,7 @@ app.get('/api', function (req, res) {
   res.json({ message: 'Welcome to your DIT342 backend ExpressJS project!' })
 })
 app.use('/api/owners', ownerController)
-app.use('/api/customers', customersController)
+app.use(customersController)
 app.use('/api/dishes', dishesController)
 
 
