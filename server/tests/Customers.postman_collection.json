@@ -3,7 +3,7 @@
 		"_postman_id": "5a3af65a-6348-46f0-b132-6f5ffa2a5f37",
 		"name": "customers",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23320294"
+		"_exporter_id": "19812185"
 	},
 	"item": [
 		{
@@ -70,7 +70,6 @@
 							"pm.test(\"Correct status code\", function(){",
 							"    pm.response.to.have.status(200);",
 							"});",
-							"",
 							""
 						],
 						"type": "text/javascript"
@@ -140,7 +139,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63297b58ad12401910a11544"
+							"value": "63369a39ce58c00babf56de3"
 						}
 					]
 				}
@@ -190,7 +189,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63232880823c540fb73689b9"
+							"value": "63369a39ce58c00babf56de3"
 						}
 					]
 				}
@@ -278,7 +277,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63297b56ad12401910a11542"
+							"value": "633698c373c7e0093a9fd111"
 						}
 					]
 				}
