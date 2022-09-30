@@ -43,9 +43,9 @@ app.use(cors())
 app.get('/api', function (req, res) {
   res.json({ message: 'Check out some of the food trucks!' })
 })
-app.use('/api/owners', ownerController)
-app.use(customersController)
 app.use('/api/dishes', dishesController)
+app.use('/api/customers', customersController)
+app.use('/api/owners', ownerController)
 
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
