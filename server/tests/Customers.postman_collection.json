@@ -3,7 +3,7 @@
 		"_postman_id": "5a3af65a-6348-46f0-b132-6f5ffa2a5f37",
 		"name": "customers",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "19812185"
+		"_exporter_id": "23320294"
 	},
 	"item": [
 		{
@@ -198,7 +198,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete all customers from the database",
+			"name": "Delete all customers from the database Copy",
 			"event": [
 				{
 					"listen": "test",
