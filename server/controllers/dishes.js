@@ -54,9 +54,24 @@ router.get('/', function (req, res, next) {
     });
 });
 
+// Put by ID
+router.put('/:id', function (req, res, next) {
+    var id = req.params.id;
+    Dish.findById(id, function (err, dishes) {
+        if (err) { return next(err); }
+        if (dishes == null) {
+            return res.status(404).json({ "message": "dishes not found" });
+        }
+        dishes.name = req.body.name
+        dishes.price = req.body.price
+        dishes.save();
+        res.status(204).json(dishes)
+    });
+});
+
 // Patch by ID
-router.patch('/:_id', function (req, res, next) {
-    var id = req.params._id;
+router.patch('/:id', function (req, res, next) {
+    var id = req.params.id;
     Dish.findById(id, function (err, dishes) {
         if (err) { return next(err); }
         if (dishes == null) {
@@ -64,9 +79,11 @@ router.patch('/:_id', function (req, res, next) {
         }
         dishes.name = (req.body.name || dishes.name);
         dishes.price = (req.body.price || dishes.price);
-        dihes.save();
-        res.json(dishes);
+        dishes.save();
+        res.status(204).json(dishes)
     });
 });
+
+
 
 module.exports = router;
