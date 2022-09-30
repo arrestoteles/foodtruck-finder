@@ -1,9 +1,7 @@
 <template>
     <div>
-        <b-button variant="danger" v-on:click="$emit('del-customer', customer._id)">X</b-button>
-        <div>The {{ customer.username }} customer</div>
-        <div class="detail"> name is:  {{ customer.username }}</div>
-        <div class="more-info">Customer summary</div>
+        <div class="detail"> Customer:  {{ customer.username }}</div>
+        <b-button variant="danger" v-on:click="$emit('del-customer', customer._id)">Delete</b-button>
     </div>
 </template>
 
@@ -23,7 +21,7 @@ export default {
 
 @media screen and (min-width: 600px) {
   .more-info {
-    color: red;
+    color: rgb(251, 255, 0);
   }
 }
 </style>

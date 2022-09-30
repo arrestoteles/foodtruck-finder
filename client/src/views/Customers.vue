@@ -2,10 +2,10 @@
   <b-container fluid="md" class="myContainer">
     <b-row>
       <b-col cols="7" offset="1" offset-md="2">
-        <b-form-input v-model="text" placeholder="Enter your name"></b-form-input>
+        <b-form-input v-model="text" placeholder="Add customer here" v-bind:b-button-toolbar="createcustomer"></b-form-input>
+          <b-button variant="success" @click="createcustomer"> Create New Customer </b-button>
       </b-col>
       <b-col cols="3">
-        <b-button>Create New</b-button>
       </b-col>
     </b-row>
     <b-row>
@@ -13,6 +13,8 @@
           <customer-item v-bind:customer="customer" v-on:del-customer="deletecustomer"/>
       </b-col>
     </b-row>
+    <div>
+</div>
   </b-container>
 </template>
 
@@ -26,7 +28,7 @@ export default {
     'customer-item': CustomerItem
   },
   mounted() {
-    console.log('PAGE is loaded!')
+    console.log('Here is a list of all customers!')
     Api.get('/customers')
       .then(response => {
         console.log(response)
@@ -50,6 +52,12 @@ export default {
           this.customers.splice(index, 1)
         })
         // TODO: catch error
+    },
+    createcustomer(id) {
+      Api.post('/customers', { username: this.text, password: 'password123' })
+        .then(response => {
+          this.customers = response.data.customers
+        })
     }
   },
   data() {
@@ -63,7 +71,7 @@ export default {
 
 <style>
 .myContainer {
-background-color: rgb(77, 81, 144);
-border: solid;
+background-color: #fa8072;
+border: #000000;
 }
 </style>

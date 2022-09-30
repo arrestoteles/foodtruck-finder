@@ -41,7 +41,7 @@ app.use(cors())
 
 // Import routes
 app.get('/api', function (req, res) {
-  res.json({ message: 'Welcome to your DIT342 backend ExpressJS project!' })
+  res.json({ message: 'Check out some of the food trucks!' })
 })
 app.use('/api/owners', ownerController)
 app.use(customersController)
