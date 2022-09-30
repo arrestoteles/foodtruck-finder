@@ -20,17 +20,19 @@
           id="exampleInputPassword1"
         />
       </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <p>
+      ----------------------------------------------------------------------------------------------------
+      or
+      ----------------------------------------------------------------------------------------------------
+    </p>
     <form>
       <div>Sign up here</div>
       <div class="form-group">
-        <label for="exampleInputEmail1">Username</label>
+        <label for="exampleInputUsername1">Username</label>
         <input
+          v-model="Username"
           type="username"
           class="form-control"
           id="exampleInputUsername"
@@ -41,27 +43,37 @@
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
         <input
+          v-model="Password"
           type="password"
           class="form-control"
           id="exampleInputPassword1"
         />
       </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      <button @click="createcustomer" type="submit" class="btn btn-primary">
+        Submit
+      </button>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="defaultCheck1"
+        />
+        <label class="form-check-label" for="defaultCheck1">
+          Owner? Check this box
+        </label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </b-container>
 </template>
 
 <script>
-import { Api } from '../Api'
+import { Api } from '@/Api'
 
 export default {
   name: 'signup',
   methods: {
-    createcustomer(id) {
+    createcustomer() {
       Api.post('/customers', {
         username: this.Username,
         password: this.Password
@@ -81,7 +93,12 @@ export default {
 
 <style>
 .myContainer {
-  background-color: #fa8072;
+  background-color: #0e7876;
   border: #000000;
+  margin-bottom: 50px;
+}
+p {
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 </style>
