@@ -2,10 +2,11 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <router-link to="/customers"> Customers</router-link>
+      <router-link to="/login"> | Login</router-link>
+      <router-link to="/customers"> | Customers</router-link>
     </div>
     <!-- Render the content of the current page view -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -15,6 +16,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #663fc0;
+  color: #000000;
 }
 </style>
