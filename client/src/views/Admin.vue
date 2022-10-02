@@ -3,14 +3,15 @@
     <b-row>
       <b-col cols="7" offset="1" offset-md="2">
         <b-form-input
+          class="form"
           v-model="text"
-          placeholder="Add customer here"
+          placeholder="Enter new customer name here"
           v-bind:b-button-toolbar="createcustomer"
         ></b-form-input>
-        <b-button variant="success" @click="createcustomer">
-          Create New Customer
-        </b-button>
       </b-col>
+      <b-button class="button" pill variant="success" @click="createcustomer">
+        Create new customer
+      </b-button>
       <b-col cols="3"> </b-col>
     </b-row>
     <b-row>
@@ -24,6 +25,7 @@
         <customer-item
           v-bind:customer="customer"
           v-on:del-customer="deletecustomer"
+          v-on:update-customer="updatecustomer"
         />
       </b-col>
     </b-row>
@@ -74,6 +76,14 @@ export default {
       }).then((response) => {
         this.customers = response.data.customers
       })
+    },
+    updatecustomer(id) {
+      alert('kladdkaka123')
+      Api.patch(`/customers/${id}`, {
+        username: 'mr robot'
+      }).then((response) => {
+        this.customers = response.data.customers
+      })
     }
   },
   data() {
@@ -87,7 +97,10 @@ export default {
 
 <style>
 .myContainer {
-  background-color: #fa8072;
+  background-color: #b0cbd1;
   border: #000000;
+}
+.button {
+  text-align: center;
 }
 </style>

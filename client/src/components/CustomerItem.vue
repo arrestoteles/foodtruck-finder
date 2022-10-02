@@ -1,8 +1,22 @@
 <template>
-  <div>
-    <div class="detail">Customer: {{ customer.username }}</div>
-    <b-button variant="danger" v-on:click="$emit('del-customer', customer._id)"
+  <div class="customer">
+    <b-avatar variant="dark"></b-avatar>
+    <div class="detail">Customer name: {{ customer.username }}</div>
+    <div class="detail">Customer password: {{ customer.password }}</div>
+    <div class="detail">id: {{ customer._id }}</div>
+    <b-button
+      class="deletebtn"
+      pill
+      variant="danger"
+      v-on:click="$emit('del-customer', customer._id)"
       >Delete</b-button
+    >
+    <b-button
+      class="updatebtn"
+      pill
+      variant="primary"
+      v-on:click="$emit('update-customer', customer._id)"
+      >Update</b-button
     >
   </div>
 </template>
@@ -25,5 +39,9 @@ export default {
   .more-info {
     color: rgb(0, 0, 0);
   }
+}
+
+.customer {
+  padding-top: 10%;
 }
 </style>
