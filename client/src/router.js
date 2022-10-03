@@ -18,11 +18,11 @@ export default new Router({
       component: Home
     },
     {
-<<<<<<< client/src/router.js
       path: '/foodtrucks',
       name: 'foodtrucks',
       component: Foodtrucks
-=======
+    },
+    {
       path: '/admin',
       name: 'admin',
       component: Admin
@@ -36,7 +36,6 @@ export default new Router({
       path: '/signup',
       name: 'signup',
       component: Signup
->>>>>>> client/src/router.js
     }
   ]
 })
