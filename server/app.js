@@ -10,6 +10,7 @@ var sessions = require('express-session')
 var ownerController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
+var userController = require('./controllers/users')
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/foodtruckDB'
@@ -44,6 +45,7 @@ app.use(cors())
 app.get('/api', function (req, res) {
   res.json({ message: 'Check out some of the food trucks!' })
 })
+app.use('/api/users', userController)
 app.use('/api/dishes', dishesController)
 app.use('/api/customers', customersController)
 app.use('/api/owners', ownerController)
