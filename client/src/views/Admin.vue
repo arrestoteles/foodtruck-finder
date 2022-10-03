@@ -70,6 +70,9 @@ export default {
       // TODO: catch error
     },
     createcustomer(id) {
+      setTimeout(function () {
+        window.location.reload()
+      }, 0)
       Api.post('/customers', {
         username: this.text,
         password: 'password123'
@@ -78,6 +81,9 @@ export default {
       })
     },
     updatecustomer(id) {
+      setTimeout(function () {
+        window.location.reload()
+      }, 0)
       alert('kladdkaka123')
       Api.patch(`/customers/${id}`, {
         username: 'mr robot'
