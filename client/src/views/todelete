@@ -1,0 +1,43 @@
+<div class="container">
+    <form action="https://WWWW.google.com/search" method="get" class="search-bar">
+    <input type="text" placeholder="search any foodtruck" name="q">
+    <button type="submit"><img src="https://img.icons8.com/color/20/FA5252/search--v1.png"></button>
+    </form>
+    </div>
+
+    .container{
+        width: 100;
+        min-height: 20vh;
+        padding: 5%;
+      }
+      .search-bar{
+        width: 100;
+        max-width: 700px;
+        max-height: 50%;
+        background: white;
+        display:flex;
+        align-items:center;
+        border-radius: 60px;
+        padding: 5px 10px;
+        backdrop-filter: blur(4px) saturate(180%);
+      }
+      .search-bar input{
+        background: transparent;
+        flex: 1;
+        border:0;
+        outline: none;
+        padding: 5px 20px;
+        font-size: 15px;
+        color: grey;
+      }
+      ::placeholder{
+        color:gray;
+      }
+      .search-bar button {
+        border: 0;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        background: lightgrey;
+        cursor: pointer;
+      }
