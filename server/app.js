@@ -4,14 +4,15 @@ var morgan = require('morgan')
 var path = require('path')
 var cors = require('cors')
 var history = require('connect-history-api-fallback')
+var cookies = require('cookie-parser')
+var sessions = require('express-session')
 
 var ownerController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
 
 // Variables
-var mongoURI =
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/foodtruckDB'
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/foodtruckDB'
 var port = process.env.PORT || 3000
 
 // Connect to MongoDB
@@ -41,12 +42,24 @@ app.use(cors())
 
 // Import routes
 app.get('/api', function (req, res) {
-  res.json({ message: 'Welcome to your DIT342 backend ExpressJS project!' })
+  res.json({ message: 'Check out some of the food trucks!' })
 })
-app.use('/api/owners', ownerController)
-app.use('/api/customers', customersController)
 app.use('/api/dishes', dishesController)
+app.use('/api/customers', customersController)
+app.use('/api/owners', ownerController)
 
+// Cookies
+app.use(cookies())
+app.use(sessions({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
+app.get("/sendCookie", function(req, res) {
+  res.cookie("yummie_cookie", "choco")
+  res.send()
+})
+
+app.get("/receiveCookie", function(req, res) {
+  console.log(req.cookies);
+  })
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
