@@ -2,12 +2,13 @@
 /** use : cards of foodtrcuks having items component for dishes  */
 /** use : tabs for moving through pages */
 <template>
+
 <body>
     <b-row>
       <b-col cols="7" offset="1" offset-md="2">
     <h1 class="header1">Foodtrucks</h1>
     <div class="container">
-    <form action="https://WWWW.google.com/search" method="get" class="search-bar">
+    <form action="https://WWWW.google.com" method="get" class="search-bar">
     <input type="text" placeholder="search any foodtruck" name="q">
     <button type="submit"><img src="https://img.icons8.com/color/20/FA5252/search--v1.png"></button>
     </form>
@@ -30,6 +31,7 @@
     <!-- how to: make components have seprate functiinality? -->
     <!-- Create: Search bar + filter -->
  </body>
+
 </template>
 
 <script>
@@ -117,5 +119,4 @@ body {
         background: lightgrey;
         cursor: pointer;
       }
-
 </style>
