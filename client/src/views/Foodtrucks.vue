@@ -37,7 +37,7 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-import ComponentFood from '@/component/ComponentFood.vue'
+import ComponentFood from '@/components/ComponentFood.vue'
 
 export default {
   name: 'foodtrucks',
