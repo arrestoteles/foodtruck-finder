@@ -3,10 +3,9 @@ const customer = require('../models/customer')
 var router = express.Router()
 var Customer = require('../models/customer')
 
-// Create a new customer
-router.post('/', function (req, res, next) {
-  var customer = new Customer(req.body)
-  customer.save(function (err, customer) {
+// Return a list of all customers
+router.get('/', function (req, res, next) {
+  Customer.find(function (err, customers) {
     if (err) {
       return next(err)
     }
@@ -14,9 +13,10 @@ router.post('/', function (req, res, next) {
   })
 })
 
-// Return a list of all customers
-router.get('/', function (req, res, next) {
-  Customer.find(function (err, customers) {
+// Create a new customer
+router.post('/', function (req, res, next) {
+  var customer = new Customer(req.body)
+  customer.save(function (err, customer) {
     if (err) {
       return next(err)
     }
@@ -25,7 +25,7 @@ router.get('/', function (req, res, next) {
 })
 
 // Return the customers with the given ID
-router.get('/:_id', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
   var id = req.params.id
   Customer.findById(id, function (err, customer) {
     if (err) {
@@ -39,7 +39,7 @@ router.get('/:_id', function (req, res, next) {
 })
 
 // Delete the customer with the given ID
-router.delete('/:_id', function (req, res, next) {
+router.delete('/:id', function (req, res, next) {
   var id = req.params.id
   Customer.findOneAndDelete({ _id: id }, function (err, customer) {
     if (err) {
@@ -63,7 +63,7 @@ router.delete('/', function(req, res, next) {
 }) 
 
 // Update the customer with given id
-router.put('/api/customers/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
     var id = req.params.id
     Customer.findById(id, function(err, customer) {
         if (err) { return next(err); }
@@ -78,7 +78,7 @@ router.put('/api/customers/:id', function(req, res, next) {
 })
 
 // Partially update the customer with the given ID
-router.patch('/api/customers/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
   var id = req.params.id
   Customer.findById(id, function(err, customer) {
       if (err) { return next(err); }

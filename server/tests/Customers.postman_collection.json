@@ -70,7 +70,6 @@
 							"pm.test(\"Correct status code\", function(){",
 							"    pm.response.to.have.status(200);",
 							"});",
-							"",
 							""
 						],
 						"type": "text/javascript"
@@ -140,7 +139,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63297b58ad12401910a11544"
+							"value": "63369a39ce58c00babf56de3"
 						}
 					]
 				}
@@ -190,7 +189,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63232880823c540fb73689b9"
+							"value": "63369a39ce58c00babf56de3"
 						}
 					]
 				}
@@ -198,7 +197,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete all customers from the database",
+			"name": "Delete all customers from the database Copy",
 			"event": [
 				{
 					"listen": "test",
@@ -278,7 +277,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "63297b56ad12401910a11542"
+							"value": "633698c373c7e0093a9fd111"
 						}
 					]
 				}
