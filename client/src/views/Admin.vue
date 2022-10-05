@@ -42,6 +42,7 @@ export default {
   components: {
     'customer-item': CustomerItem
   },
+
   mounted() {
     console.log('Here is a list of all customers!')
     Api.get('/customers')
@@ -58,6 +59,7 @@ export default {
         console.log('This runs every time after success or error.')
       })
   },
+
   methods: {
     deletecustomer(id) {
       console.log(`Delete customer with id ${id}`)
@@ -69,22 +71,25 @@ export default {
       })
       // TODO: catch error
     },
+
     createcustomer(id) {
       setTimeout(function () {
         window.location.reload()
       }, 0)
       Api.post('/customers', {
-        username: this.text,
+        firstname: this.text,
+        lastname: 'Smith',
+        email: 'email@gmail.com',
         password: 'password123'
       }).then((response) => {
         this.customers = response.data.customers
       })
     },
+
     updatecustomer(id) {
       setTimeout(function () {
         window.location.reload()
       }, 0)
-      alert('kladdkaka123')
       Api.patch(`/customers/${id}`, {
         username: 'mr robot'
       }).then((response) => {
@@ -92,6 +97,7 @@ export default {
       })
     }
   },
+
   data() {
     return {
       customers: [],

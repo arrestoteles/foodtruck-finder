@@ -70,7 +70,9 @@ router.put('/:id', function(req, res, next) {
         if (customer == null) {
             return res.status(404).json({"message": "Customer not found"})
         }
-        customer.username = req.body.username
+        customer.firstname = req.body.firstname
+        customer.lastname = req.body.lastname
+        customer.email = req.body.email
         customer.password = req.body.password
         customer.save()
         res.status(204).json(customer)
@@ -85,7 +87,9 @@ router.patch('/:id', function(req, res, next) {
       if (customer == null) {
           return res.status(404).json({"message": "Customer not found"})
       }
-      customer.username = (req.body.username || customer.username)
+      customer.firstname = (req.body.firstname || customer.firstname)
+      customer.lastname = (req.body.lastname || customer.lastname)
+      customer.email = (req.body.email || customer.email)
       customer.password = (req.body.password || customer.password)
       customer.save()
       res.status(204).json(customer)

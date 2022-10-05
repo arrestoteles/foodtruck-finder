@@ -32,7 +32,7 @@
       <b-form-group id="input-group-4" label="Password" label-for="input-4">
         <b-form-input
           id="input-4"
-          v-model="form.email"
+          v-model="form.password"
           placeholder="Enter a password"
           required
         ></b-form-input>
@@ -45,25 +45,33 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
+
 export default {
   data() {
     return {
       form: {
-        username: '',
-        food: null
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: ''
       },
-      foods: [
-        { text: 'Select One', value: null },
-        'Carrots',
-        'Beans',
-        'Tomatoes',
-        'Corn'
-      ],
       show: true
     }
   },
   methods: {
     onSubmit(event) {
+      setTimeout(function () {
+        window.location.reload()
+      }, 0)
+      Api.post('/customers', {
+        firstname: this.form.firstname,
+        lastname: this.form.lastname,
+        email: this.form.email,
+        password: this.form.password
+      }).then((response) => {
+        this.customers = response.data.customers
+      })
       event.preventDefault()
       alert('Your account has been successfully created!')
     },
