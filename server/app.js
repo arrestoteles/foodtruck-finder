@@ -16,6 +16,7 @@ var ownerController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
 var userController = require('./controllers/users')
+var foodtruckController = require('./controllers/foodtrucks')
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/foodtruckDB'
@@ -54,6 +55,8 @@ app.use('/api/users', userController)
 app.use('/api/dishes', dishesController)
 app.use('/api/customers', customersController)
 app.use('/api/owners', ownerController)
+app.use('/api/foodtrucks', foodtruckController)
+
 
 // Cookies
 app.use(cookies())

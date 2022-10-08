@@ -5,6 +5,7 @@ import Foodtrucks from './views/Foodtrucks.vue'
 import Admin from './views/Admin.vue'
 import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
+import Owner from './views/Owners.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/signup',
       name: 'signup',
       component: Signup
+    },
+    {
+      path: '/owners',
+      name: 'owners',
+      component: Owner
     }
   ]
 })

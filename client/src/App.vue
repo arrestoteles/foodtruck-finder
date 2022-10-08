@@ -6,6 +6,7 @@
       <router-link to="/login">Login</router-link> |
       <router-link to="/signup">Sign up</router-link> |
       <router-link to="/admin">Admin</router-link> |
+      <router-link to="/Owners">Owners</router-link> |
     </div>
     <!-- Render the content of the current page view -->
     <router-view />
