@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form class="myForm" @submit="login" @reset="onReset" v-if="show">
+    <b-form class="myForm" @submit.prevent="login" @reset="onReset" v-if="show">
       <b-form-group id="input-group-1" label="Email" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -20,35 +20,41 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" pill variant="primary">Login</b-button>
+      <b-button @click.prevent="login" type="submit" pill variant="primary"
+        >Login</b-button
+      >
       <b-button type="reset" pill variant="outline-danger">Reset</b-button>
     </b-form>
   </div>
 </template>
 
 <script>
+import { Api } from '@/Api'
+
 export default {
   data() {
     return {
       form: {
-        username: '',
-        food: null
+        email: '',
+        password: ''
       },
-      foods: [
-        { text: 'Select One', value: null },
-        'Carrots',
-        'Beans',
-        'Tomatoes',
-        'Corn'
-      ],
+
       show: true
     }
   },
   methods: {
-    login(event) {
-      event.preventDefault()
-      alert('Your account has been successfully created!')
+    async login() {
+      setTimeout(function () {}, 0)
+      Api.post('/customers/login', {
+        email: this.form.email,
+        password: this.form.password
+      }).then((response) => {
+        window.location.replace('http://localhost:8081/mypage')
+        console.log(response.data.customers)
+        this.customers = response.data.customers
+      })
     },
+
     onReset(event) {
       event.preventDefault()
       // Reset our form values

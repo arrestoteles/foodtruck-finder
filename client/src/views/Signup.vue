@@ -1,10 +1,15 @@
 <template>
   <div>
-    <b-form class="myForm" @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form
+      class="myForm"
+      @submit.prevent="onSubmit"
+      @reset.prevent="onReset"
+      v-if="show"
+    >
       <b-form-group id="input-group-1" label="First Name" label-for="input-1">
         <b-form-input
           id="input-1"
-          v-model="form.firstname"
+          v-model="form.first_name"
           type="firstname"
           placeholder="Enter your first name"
           required
@@ -14,7 +19,7 @@
       <b-form-group id="input-group-2" label="Last Name" label-for="input-2">
         <b-form-input
           id="input-2"
-          v-model="form.lastname"
+          v-model="form.last_name"
           placeholder="Enter your last name"
           required
         ></b-form-input>
@@ -51,8 +56,8 @@ export default {
   data() {
     return {
       form: {
-        firstname: '',
-        lastname: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: ''
       },
@@ -60,26 +65,26 @@ export default {
     }
   },
   methods: {
-    onSubmit(event) {
+    async onSubmit() {
       setTimeout(function () {
         window.location.reload()
       }, 0)
       Api.post('/customers', {
-        firstname: this.form.firstname,
-        lastname: this.form.lastname,
+        first_name: this.form.first_name,
+        last_name: this.form.last_name,
         email: this.form.email,
         password: this.form.password
       }).then((response) => {
         this.customers = response.data.customers
+        localStorage.setItem('token', response.data.token)
       })
-      event.preventDefault()
       alert('Your account has been successfully created!')
     },
-    onReset(event) {
-      event.preventDefault()
+
+    async onReset() {
       // Reset our form values
-      this.form.firstname = ''
-      this.form.lastname = ''
+      this.form.first_name = ''
+      this.form.last_name = ''
       this.form.email = ''
       this.form.password = ''
       // Trick to reset/clear native browser form validation state
