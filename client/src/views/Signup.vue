@@ -59,6 +59,7 @@ export default {
       show: true
     }
   },
+
   methods: {
     onSubmit(event) {
       setTimeout(function () {
@@ -75,6 +76,7 @@ export default {
       event.preventDefault()
       alert('Your account has been successfully created!')
     },
+
     onReset(event) {
       event.preventDefault()
       // Reset our form values
