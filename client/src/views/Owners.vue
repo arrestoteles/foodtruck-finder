@@ -59,7 +59,7 @@ export default {
       })
   },
   methods: {
-    deletefoodtrucks(id) {
+    deletefoodtruck(id) {
       console.log(`Delete foodtruck with id ${id}`)
       Api.delete(`/foodtrucks/${id}`).then((response) => {
         const index = this.foodtrucks.findIndex(
@@ -80,7 +80,7 @@ export default {
         this.foodtrucks = response.data.foodtrucks
       })
     },
-    updatefoodtrucks(id) {
+    updatefoodtruck(id) {
       setTimeout(function () {
         window.location.reload()
       }, 0)
