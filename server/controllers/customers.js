@@ -33,6 +33,7 @@ router.post('/', async (req, res) => {
     const oldUser = await Customer.findOne({ email });
 
     if (oldUser) {
+      console.log('User already exists!');
       return res.status(409).send("User Already Exist. Please Login");
     }
 
@@ -96,7 +97,7 @@ router.post("/login", async (req, res) => {
       // user
       res.status(200).json(user);
     }
-    res.status(400).json('Invalid credentials!')
+    res.status(400).send('Invalid Credentials!')
   } catch (err) {
     console.log(err);
   }

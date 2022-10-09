@@ -76,9 +76,8 @@ export default {
         password: this.form.password
       }).then((response) => {
         this.customers = response.data.customers
-        localStorage.setItem('token', response.data.token)
+        // TODO inform upon unsuccessful signup
       })
-      alert('Your account has been successfully created!')
     },
 
     async onReset() {

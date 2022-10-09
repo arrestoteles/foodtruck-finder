@@ -7,11 +7,8 @@ var history = require('connect-history-api-fallback')
 var cookies = require('cookie-parser')
 var sessions = require('express-session')
 require('dotenv').config();
-const User = require('./models/user');
-var bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const auth = require('./middleware/auth');
 
+// Controllers
 var ownerController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
@@ -67,11 +64,6 @@ app.get("/sendCookie", function(req, res) {
 app.get("/receiveCookie", function(req, res) {
   console.log(req.cookies);
   })
-
-
-app.post("/api/welcome", auth, (req, res) => {
-  res.status(200).send("Welcome 🙌 ");
-});
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {

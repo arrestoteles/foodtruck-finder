@@ -49,7 +49,7 @@ export default {
         email: this.form.email,
         password: this.form.password
       }).then((response) => {
-        window.location.replace('http://localhost:8081/mypage')
+        window.location.replace('http://localhost:8081/customer')
         console.log(response.data.customers)
         this.customers = response.data.customers
       })
