@@ -61,11 +61,15 @@ export default {
         email: this.form.email,
         password: this.form.password
       }).then((response) => {
-        if (response.status === 400) {
-          alert('response')
-        } else {
+        if (response.status === 200) {
           const id = response.data._id
-          window.location.replace(`http://localhost:8081/customer/${id}`)
+          alert(
+            response.status === 200 ? 'Successul Login!' : 'ERROR ON TERROR'
+          )
+          window.location.assign(
+            `http://localhost:8081/customer/${id}` ||
+              `https://limitless-harbor-45889.herokuapp.com/api/customer/${id}`
+          )
           this.customers = response.data.customers
         }
       })
