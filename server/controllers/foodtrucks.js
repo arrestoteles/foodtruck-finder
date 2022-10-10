@@ -11,11 +11,8 @@ router.post('/', function (req, res, next) {
     })
 });
 
-
-
 //Create reminder for specific user
 router.post('/api/foodtrucks/:_id/dishes', function (req, res, next) {
-
     var dish = new dish(req.body);
     dish.user_id = req.params._id;
     dish.save(function (err, dish) {
@@ -24,14 +21,16 @@ router.post('/api/foodtrucks/:_id/dishes', function (req, res, next) {
         }
         res.status(201).json(dish);
     })
-});
+})
+
 //Get all users
 router.get('/api/foodtrucks', function (req, res, next) {
     foodtruck.find(function (err, users) {
         if (err) { return next(err); }
         res.json({ "foodtrucks": foodtrucks });
     });
-});
+})
+
 //Get all reminders of specific user
 router.get('/api/users/:_id/reminders', function (req, res, next) {
     dish.find(function (err, dishes) {
@@ -39,8 +38,6 @@ router.get('/api/users/:_id/reminders', function (req, res, next) {
         res.json({ "dishes": dishes });
     });
 });
-
-
 
 //Get all foodtrucks 
 router.get('/', function (req, res, next) {
@@ -77,7 +74,6 @@ router.patch('/:_id', function (req, res, next) {
     });
 });
 
-
 //Delete individual foodtruck by ID
 router.delete('/:_id', function (req, res, next) {
     var id = req.params._id;
@@ -89,6 +85,5 @@ router.delete('/:_id', function (req, res, next) {
         res.json(foodtrucks);
     });
 });
-
 
 module.exports = router;

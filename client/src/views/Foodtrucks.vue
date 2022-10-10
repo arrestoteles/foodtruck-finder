@@ -1,6 +1,3 @@
-
-/** use : cards of foodtrcuks having items component for dishes  */
-/** use : tabs for moving through pages */
 <template>
 
 <body>
@@ -16,7 +13,7 @@
     <div class="row">
     <div class= "col-7 col-md-5"><component-food/></div>
     <div class= "col-7 col-md-5"><component-food/></div>
-    <div  class= "col-7 col-md-1"><component-food/></div>
+    <div class= "col-7 col-md-1"><component-food/></div>
     <div class= "col-7 col-md-5"><component-food/></div>
     <div class= "col-7 col-md-5"><component-food/></div>
     <div class= "col-7 col-md-1"><component-food/></div>
@@ -31,7 +28,6 @@
     <!-- how to: make components have seprate functiinality? -->
     <!-- Create: Search bar + filter -->
  </body>
-
 </template>
 
 <script>
@@ -44,11 +40,13 @@ export default {
   components: {
     ComponentFood
   },
+
   data() {
     return {
       text: ''
     }
   },
+
   methods: {
     getMessage() {
       Api.get('/')
@@ -79,7 +77,7 @@ body {
   background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
   background-repeat: no-repeat;
   background-color: #45d03b;
-   background-size: cover;
+  background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
