@@ -12,7 +12,8 @@ require('dotenv').config();
 var ownerController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
-var userController = require('./controllers/users') 
+var userController = require('./controllers/users')
+var foodtrucksController = require('./controllers/foodtrucks')
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://arrestoteles:6SS7BD9hMnzbf@cluster0.iveprem.mongodb.net/?retryWrites=true&w=majority'
@@ -51,6 +52,7 @@ app.use('/api/users', userController)
 app.use('/api/dishes', dishesController)
 app.use('/api/customers', customersController)
 app.use('/api/owners', ownerController)
+app.use('/api/foodtrucks', foodtrucksController)
 
 // Cookies
 app.use(cookies())
