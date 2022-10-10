@@ -1,6 +1,3 @@
-
-/** use : cards of foodtrcuks having items component for dishes  */
-/** use : tabs for moving through pages */
 <template>
 
 <body>
@@ -14,15 +11,13 @@
     </form>
     </div>
     <div class="row">
-    <div class= "col-7 col-md-5" id="1"><component-food/></div>
-    <div class= "col-7 col-md-5" id="2"><component-food/></div>
-    <div  class= "col-7 col-md-1" id="3"><component-food/></div>
-    <div class= "col-7 col-md-5" id="4"><component-food/></div>
-    <div class= "col-7 col-md-5" id="5"><component-food/></div>
-    <div class= "col-7 col-md-1" id="6"><component-food/></div>
-    <div class= "col-8 col-md-5" id="7"><component-food/></div>
-    <div class= "col-7 col-md-5" id="8"><component-food/></div>
-    <div class= "col-7 col-md-1" id="9"><component-food/></div>
+    <b-row>
+    <b-col v-for="foodtruck in foodtrucks"
+        v-bind:key="foodtruck._id">
+<component-food/>
+
+</b-col>
+</b-row>
     </div>
     </b-col>
     </b-row>
@@ -38,13 +33,25 @@ import ComponentFood from '@/components/ComponentFood.vue'
 export default {
   name: 'foodtrucks',
   components: {
-    ComponentFood
+    'component-food': ComponentFood
   },
-  data() {
-    return {
-      text: ''
-    }
+  mounted() {
+    console.log('Here is a list of all foodtrucks!')
+    Api.get('/foodtrucks')
+      .then((response) => {
+        console.log(response)
+        this.foodtrucks = response.data.foodtrucks
+      })
+      .catch((error) => {
+        this.foodtrucks = []
+        console.log(error)
+        //   TODO: display some error message instead of logging to console
+      })
+      .then(() => {
+        console.log('This runs every time after success or error.')
+      })
   },
+
   methods: {
     getMessage() {
       Api.get('/')
@@ -54,6 +61,13 @@ export default {
         .catch(error => {
           this.message = error
         })
+    }
+  },
+
+  data() {
+    return {
+      foodtrucks: [],
+      text: ''
     }
   }
 }
@@ -78,6 +92,7 @@ body {
    background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  resize: horizontal; overflow: hidden;
 }
  .container{
         width: 100;
@@ -115,5 +130,4 @@ body {
       background: lightgrey;
       cursor: pointer;
     }
-
 </style>

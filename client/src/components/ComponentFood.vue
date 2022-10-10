@@ -14,9 +14,9 @@
       <b-card-header header-tag="header" class="p-1" role="tab">
         <b-button block v-b-toggle.accordion-1 variant="info">Dish Menu</b-button>
       </b-card-header>
-      <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel" v-on="dishlist">
+      <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
         <b-card-body>
-          <b-card-text>{{ dishes }}</b-card-text>
+          <b-card-text></b-card-text>
         </b-card-body>
       </b-collapse>
     </b-card>
@@ -29,22 +29,9 @@
 
 <script>
 export default {
-  name: 'Foodtruck-Card',
+  name: 'ComponentFood',
   props: ['foodtruck']
 }
-</script>
-<script>
-  export default {
-    data() {
-      return {
-        dishes
-      }
-    }
-    ,methods: {
-    dishlist() {
-    }
-  }
-  }
 </script>
 
  <style scoped>
