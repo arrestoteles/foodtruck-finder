@@ -27,6 +27,11 @@ export default new Router({
       path: '/admin',
       name: 'admin',
       component: Admin
+      /*
+      beforeEnter: (to, from) => {
+        // reject the navigation
+        return false
+      } */
     },
     {
       path: '/login',
@@ -43,6 +48,5 @@ export default new Router({
       name: 'customer',
       component: Customer
     }
-
   ]
 })
