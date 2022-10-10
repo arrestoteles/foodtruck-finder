@@ -3,6 +3,7 @@ var router = express.Router()
 var Customer = require('../models/customer')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { response } = require('../app');
 
 // Return a list of all customers
 router.get('/', function (req, res, next) {
@@ -96,6 +97,7 @@ router.post("/login", async (req, res) => {
       // user
       res.status(200).json(user);
     }
+  res.status(400).json(user)
   // TODO res.status(400).send("Invalid Credentials");
   // TODO console.log('Invalid Credentials!');
   } catch (err) {
