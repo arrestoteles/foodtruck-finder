@@ -41,3 +41,23 @@
         background: lightgrey;
         cursor: pointer;
       }
+
+
+      <a href="#" class="btn btn-primary">Opening hours</a>
+
+      <b-button v-b-toggle.collapse-2 class="m-1">Location</b-button>
+
+      <b-card no-body class="mb-1">
+      <b-card-header header-tag="header" class="p-1" role="tab">
+        <b-button block v-b-toggle.accordion-2 variant="info">Dish #2: Vegan Pizza</b-button>
+      </b-card-header>
+      <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+        <b-card-body>
+          <b-card-text>{{ text2 }}</b-card-text>
+        </b-card-body>
+      </b-collapse>
+    </b-card>
+
+
+
+    <h6 class="card-text">Color of the foodtruck:</h6>

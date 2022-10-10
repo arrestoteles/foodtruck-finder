@@ -14,22 +14,18 @@
     </form>
     </div>
     <div class="row">
-    <div class= "col-7 col-md-5"><component-food/></div>
-    <div class= "col-7 col-md-5"><component-food/></div>
-    <div  class= "col-7 col-md-1"><component-food/></div>
-    <div class= "col-7 col-md-5"><component-food/></div>
-    <div class= "col-7 col-md-5"><component-food/></div>
-    <div class= "col-7 col-md-1"><component-food/></div>
-    <div class= "col-8 col-md-5"><component-food/></div>
-    <div class= "col-7 col-md-5"><component-food/></div>
-    <div class= "col-7 col-md-1"><component-food/></div>
+    <div class= "col-7 col-md-5" id="1"><component-food/></div>
+    <div class= "col-7 col-md-5" id="2"><component-food/></div>
+    <div  class= "col-7 col-md-1" id="3"><component-food/></div>
+    <div class= "col-7 col-md-5" id="4"><component-food/></div>
+    <div class= "col-7 col-md-5" id="5"><component-food/></div>
+    <div class= "col-7 col-md-1" id="6"><component-food/></div>
+    <div class= "col-8 col-md-5" id="7"><component-food/></div>
+    <div class= "col-7 col-md-5" id="8"><component-food/></div>
+    <div class= "col-7 col-md-1" id="9"><component-food/></div>
     </div>
     </b-col>
     </b-row>
-    <!-- how to: have space between rows? -->
-    <!-- how to: fix the components to the background? -->
-    <!-- how to: make components have seprate functiinality? -->
-    <!-- Create: Search bar + filter -->
  </body>
 
 </template>
@@ -119,4 +115,5 @@ body {
       background: lightgrey;
       cursor: pointer;
     }
+
 </style>
