@@ -12,10 +12,10 @@ require('dotenv').config();
 var ownerController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
-var userController = require('./controllers/users')
+var userController = require('./controllers/users') 
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://arrestoteles:6SS7BD9hMnzbf@cluster0.iveprem.mongodb.net/foodtruckDB'
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://arrestoteles:6SS7BD9hMnzbf@cluster0.iveprem.mongodb.net/?retryWrites=true&w=majority'
 var port = process.env.PORT || 3000
 
 // Connect to MongoDB
