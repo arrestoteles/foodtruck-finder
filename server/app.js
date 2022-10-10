@@ -15,7 +15,7 @@ var dishesController = require('./controllers/dishes')
 var userController = require('./controllers/users')
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/foodtruckDB'
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://arrestoteles:6SS7BD9#$hMnzb@f@cluster0.iveprem.mongodb.net/test'
 var port = process.env.PORT || 3000
 
 // Connect to MongoDB
