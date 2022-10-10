@@ -21,7 +21,6 @@
     </b-col>
     </b-row>
  </body>
-
 </template>
 
 <script>

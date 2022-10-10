@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form
-      class="myForm"
+      class="col-12 col-md-4"
       @submit.prevent="onSubmit"
       @reset.prevent="onReset"
       v-if="show"
@@ -36,6 +36,7 @@
 
       <b-form-group id="input-group-4" label="Password" label-for="input-4">
         <b-form-input
+          type="password"
           id="input-4"
           v-model="form.password"
           placeholder="Enter a password"
@@ -98,8 +99,10 @@ export default {
 </script>
 
 <style scoped>
-.myForm {
+.col-12 {
   padding-top: 3%;
-  background-color: #dae1c1;
+  background-color: #bedcdc;
+  margin: 0 auto;
+  width: 80%; /* value of your choice which suits your alignment */
 }
 </style>

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <b-form class="myForm" @submit.prevent="login" @reset="onReset" v-if="show">
+    <b-form
+      class="col-12 col-md-4"
+      @submit.prevent="login"
+      @reset="onReset"
+      v-if="show"
+    >
       <b-form-group id="input-group-1" label="Email" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -11,8 +16,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Password" label-for="input-2">
+      <b-form-group
+        id="input-group-2"
+        label="Password"
+        input
+        label-for="input-2"
+      >
         <b-form-input
+          type="password"
           id="input-2"
           v-model="form.password"
           placeholder="Enter your password"
@@ -42,6 +53,7 @@ export default {
       show: true
     }
   },
+
   methods: {
     async login() {
       setTimeout(function () {}, 0)
@@ -49,9 +61,13 @@ export default {
         email: this.form.email,
         password: this.form.password
       }).then((response) => {
-        window.location.replace('http://localhost:8081/customer')
-        console.log(response.data.customers)
-        this.customers = response.data.customers
+        if (response.status === 400) {
+          alert('response')
+        } else {
+          const id = response.data._id
+          window.location.replace(`http://localhost:8081/customer/${id}`)
+          this.customers = response.data.customers
+        }
       })
     },
 
@@ -71,8 +87,10 @@ export default {
 </script>
 
 <style scoped>
-.myForm {
+.col-12 {
   padding-top: 3%;
-  background-color: #bedcdc;
+  background-color: #fff8f0;
+  margin: 0 auto;
+  width: 80%; /* value of your choice which suits your alignment */
 }
 </style>

@@ -19,14 +19,16 @@ router.post('/api/foodtrucks/:_id/dishes', function (req, res, next) {
         }
         res.status(201).json(dish);
     })
-});
+})
+
 //Get all users
 router.get('/api/foodtrucks', function (req, res, next) {
     foodtruck.find(function (err, users) {
         if (err) { return next(err); }
         res.json({ "foodtrucks": foodtrucks });
     });
-});
+})
+
 //Get all reminders of specific user
 router.get('/api/users/:_id/reminders', function (req, res, next) {
     dish.find(function (err, dishes) {
@@ -78,7 +80,6 @@ router.delete('/:_id', function (req, res, next) {
     });
 });
 module.exports = router;
-
 
 
 
