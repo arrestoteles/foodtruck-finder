@@ -1,8 +1,8 @@
 <template>
   <div class="customer">
     <b-avatar variant="dark"></b-avatar>
-    <div class="detail">First name: {{ customer.firstname }}</div>
-    <div class="detail">Last name: {{ customer.lastname }}</div>
+    <div class="detail">First name: {{ customer.first_name }}</div>
+    <div class="detail">Last name: {{ customer.last_name }}</div>
     <div class="detail">Email: {{ customer.email }}</div>
     <div class="detail">Password: {{ customer.password }}</div>
     <div class="detail">id: {{ customer._id }}</div>

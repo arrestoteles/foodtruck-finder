@@ -1,5 +1,7 @@
 <template>
-  <div>This is my page</div>
+  <div>
+    <p>This is the customer vue</p>
+  </div>
 </template>
 
 <script>

@@ -7,18 +7,15 @@ var history = require('connect-history-api-fallback')
 var cookies = require('cookie-parser')
 var sessions = require('express-session')
 require('dotenv').config();
-const User = require('./models/user');
-var bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const auth = require('./middleware/auth');
 
+// Controllers
 var ownerController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
 var userController = require('./controllers/users')
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/foodtruckDB'
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://arrestoteles:6SS7BD9#$hMnzb@f@cluster0.iveprem.mongodb.net/test'
 var port = process.env.PORT || 3000
 
 // Connect to MongoDB
@@ -67,47 +64,6 @@ app.get("/sendCookie", function(req, res) {
 app.get("/receiveCookie", function(req, res) {
   console.log(req.cookies);
   })
-
-app.post("/api/login", async (req, res) => {
-
-  // Our login logic starts here
-  try {
-    // Get user input
-    const { email, password } = req.body;
-
-    // Validate user input
-    if (!(email && password)) {
-      res.status(400).send("All input is required");
-    }
-    // Validate if user exist in our database
-    const user = await User.findOne({ email });
-
-    if (user && (await bcrypt.compare(password, user.password))) {
-      // Create token
-      const token = jwt.sign(
-        { user_id: user._id, email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        }
-      );
-
-      // save user token
-      user.token = token;
-
-      // user
-      res.status(200).json(user);
-    }
-    res.status(400).send("Invalid Credentials");
-  } catch (err) {
-    console.log(err);
-  }
-  // Our register logic ends here
-});
-
-app.post("/api/welcome", auth, (req, res) => {
-  res.status(200).send("Welcome 🙌 ");
-});
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {

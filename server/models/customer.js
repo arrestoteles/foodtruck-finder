@@ -2,10 +2,11 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var customerSchema = new Schema({
-  firstname: { type: String },
-  lastname: { type: String },
+  first_name: { type: String },
+  last_name: { type: String },
   email: { type: String },
-  password: { type: String }
+  password: { type: String },
+  token: { type: String }
 })
 
 module.exports = mongoose.model('customers', customerSchema)
