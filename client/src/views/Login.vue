@@ -67,8 +67,8 @@ export default {
             response.status === 200 ? 'Successul Login!' : 'ERROR ON TERROR'
           )
           window.location.assign(
-            `http://localhost:8081/customer/${id}` ||
-              `https://limitless-harbor-45889.herokuapp.com/api/customer/${id}`
+            // http://localhost:8081/customer/${id}
+            `https://limitless-harbor-45889.herokuapp.com/api/customer/${id}`
           )
           this.customers = response.data.customers
         }
