@@ -2,25 +2,31 @@
   <body>
     <b-row>
       <b-col cols="7" offset="1" offset-md="2">
-      <h1 class="header1">Foodtrucks</h1>
-      <div class="container">
-      <form action="https://WWWW.google.com" method="get" class="search-bar">
-      <input type="text" placeholder="search any foodtruck" name="q">
-      <button type="submit"><img src="https://img.icons8.com/color/20/FA5252/search--v1.png"></button>
-    </form>
-    </div>
-    <div class="row">
-    <b-row>
-    <b-col v-for="foodtruck in foodtrucks"
-        v-bind:key="foodtruck._id">
-<component-food/>
-
-</b-col>
-</b-row>
-    </div>
-    </b-col>
+        <h1 class="header1">Foodtrucks</h1>
+        <div class="container">
+          <form
+            action="https://WWWW.google.com"
+            method="get"
+            class="search-bar"
+          >
+            <input type="text" placeholder="search any foodtruck" name="q" />
+            <button type="submit">
+              <img
+                src="https://img.icons8.com/color/20/FA5252/search--v1.png"
+              />
+            </button>
+          </form>
+        </div>
+        <div class="row">
+          <b-row>
+            <b-col v-for="foodtruck in foodtrucks" v-bind:key="foodtruck._id">
+              <component-food />
+            </b-col>
+          </b-row>
+        </div>
+      </b-col>
     </b-row>
- </body>
+  </body>
 </template>
 
 <script>
@@ -33,23 +39,6 @@ export default {
   components: {
     'component-food': ComponentFood
   },
-  mounted() {
-    console.log('Here is a list of all foodtrucks!')
-    Api.get('/foodtrucks')
-      .then((response) => {
-        console.log(response)
-        this.foodtrucks = response.data.foodtrucks
-      })
-      .catch((error) => {
-        this.foodtrucks = []
-        console.log(error)
-        //   TODO: display some error message instead of logging to console
-      })
-      .then(() => {
-        console.log('This runs every time after success or error.')
-      })
-  },
-
   mounted() {
     console.log('Here is a list of all customers!')
     Api.get('/customers')
@@ -107,7 +96,8 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  resize: horizontal; overflow: hidden;
+  resize: horizontal;
+  overflow: hidden;
 }
 .container {
   width: 100;
