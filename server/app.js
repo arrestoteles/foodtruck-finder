@@ -13,7 +13,7 @@ var ownersController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
 var usersController = require('./controllers/users')
-var foodtruckController = require('./controllers/foodtrucks')
+var foodtrucksController = require('./controllers/foodtrucks')
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://arrestoteles:6SS7BD9hMnzbf@cluster0.iveprem.mongodb.net/?retryWrites=true&w=majority'
@@ -52,7 +52,7 @@ app.use('/api/users', usersController)
 app.use('/api/dishes', dishesController)
 app.use('/api/customers', customersController)
 app.use('/api/owners', ownersController)
-app.use('/ap/foodtrucks', foodtruckController)
+app.use('/ap/foodtrucks', foodtrucksController)
 
 // Cookies
 app.use(cookies())
