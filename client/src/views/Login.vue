@@ -90,30 +90,24 @@ export default {
 
   methods: {
     async login() {
-      const select = document.getElementsByTagName('selection')
-      const selected = select.id
-      if (selected === 'Customer') {
-        Api.post('/customers/login', {
-          email: this.form.email,
-          password: this.form.password
-        }).then((response) => {
-          if (response.status === 200) {
-            const id = response.data._id
-            /*
+      Api.post('/customers/login', {
+        email: this.form.email,
+        password: this.form.password
+      }).then((response) => {
+        if (response.status === 200) {
+          const id = response.data._id
+          /*
             window.location.assign(
               // https://limitless-harbor-45889.herokuapp.com/api/customer/${id}
               `http://localhost:8081/customer/${id}`
             )
             */
-            this.$router.push(
-              `https://limitless-harbor-45889.herokuapp.com/api/customer/${id}`
-            )
-            this.customers = response.data.customers
-          }
-        })
-      } else if (selected === 'Admin') {
-        alert('Admin selected')
-      }
+          this.$router.push(
+            `https://limitless-harbor-45889.herokuapp.com/api/customer/${id}`
+          )
+          this.customers = response.data.customers
+        }
+      })
     },
 
     onReset(event) {
