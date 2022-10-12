@@ -2,17 +2,16 @@
   <b-container fluid="md" class="myContainer">
     <b-row>
       <b-col cols="7" offset="1" offset-md="2">
-        <b-form-input
-          class="form"
-          v-model="text"
-          placeholder="Enter new foodtruck name here"
-          v-bind:b-button-toolbar="createfoodtruck"
-        ></b-form-input>
+        <form>
+          <input v-model="text" placeholder="search any foodtruck" name="q" />
+          <b-button @click="searching">
+            <img src="https://img.icons8.com/color/20/FA5252/search--v1.png" />
+          </b-button>
+        </form>
       </b-col>
       <b-button class="button" pill variant="success" @click="createfoodtruck">
         Create new foodtruck
       </b-button>
-      <b-col cols="3"> </b-col>
     </b-row>
     <b-row>
       <b-col
@@ -23,6 +22,7 @@
         md="4"
       >
         <foodtruck-item
+          v-if="foodtruck.name === text"
           v-bind:foodtruck="foodtruck"
           v-on:del-foodtruck="deletefoodtruck"
           v-on:update-foodtruck="updatefoodtruck"
@@ -88,6 +88,12 @@ export default {
       Api.patch(`/foodtrucks/${id}`, {
         name: 'mr robot'
       }).then((response) => {
+        this.foodtrucks = response.data.foodtrucks
+      })
+    },
+    searching(text) {
+      Api.get(`/foodtrucks?name=${this.text}`).then((response) => {
+        console.log(response)
         this.foodtrucks = response.data.foodtrucks
       })
     }
