@@ -9,7 +9,7 @@ router.post('/', function (req, res, next) {
         res.status(201).json(foodtruck);
     })
 });
-//Create reminder for specific user
+// Dish for foodtruck
 router.post('/api/foodtrucks/:_id/dishes', function (req, res, next) {
     var dish = new dish(req.body);
     dish.user_id = req.params._id;
@@ -21,6 +21,14 @@ router.post('/api/foodtrucks/:_id/dishes', function (req, res, next) {
     })
 })
 
+//Get all dishes of specific foodtruck
+router.get('/api/foodtruck/:_id/dishes', function (req, res, next) {
+    dish.find(function (err, dishes) {
+        if (err) { return next(err); }
+        res.json({ "dishes": dishes });
+    });
+});
+
 //Get all users
 router.get('/api/foodtrucks', function (req, res, next) {
     foodtruck.find(function (err, users) {
@@ -29,13 +37,7 @@ router.get('/api/foodtrucks', function (req, res, next) {
     });
 })
 
-//Get all reminders of specific user
-router.get('/api/users/:_id/reminders', function (req, res, next) {
-    dish.find(function (err, dishes) {
-        if (err) { return next(err); }
-        res.json({ "dishes": dishes });
-    });
-});
+
 //Get all foodtrucks
 router.get('/', function (req, res, next) {
     Foodtruck.find(function (err, foodtrucks) {
