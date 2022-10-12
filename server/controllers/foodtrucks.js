@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var Foodtruck = require('../models/foodtruck');
-
 //Create (post foodtruck)
 router.post('/', function (req, res, next) {
     var foodtruck = new Foodtruck(req.body);
@@ -10,7 +9,6 @@ router.post('/', function (req, res, next) {
         res.status(201).json(foodtruck);
     })
 });
-
 //Create reminder for specific user
 router.post('/api/foodtrucks/:_id/dishes', function (req, res, next) {
     var dish = new dish(req.body);
@@ -38,15 +36,13 @@ router.get('/api/users/:_id/reminders', function (req, res, next) {
         res.json({ "dishes": dishes });
     });
 });
-
-//Get all foodtrucks 
+//Get all foodtrucks
 router.get('/', function (req, res, next) {
     Foodtruck.find(function (err, foodtrucks) {
         if (err) { return next(err); }
         res.json({ "foodtrucks": foodtrucks });
     });
 });
-
 //Get food truck by ID (get individeual foodtruck by ID)
 router.get('/:_id', function (req, res, next) {
     var id = req.params._id;
@@ -58,7 +54,6 @@ router.get('/:_id', function (req, res, next) {
         res.json(foodtrucks);
     });
 });
-
 //Patch function by ID (Patch individual item )
 router.patch('/:_id', function (req, res, next) {
     var id = req.params._id;
@@ -73,7 +68,6 @@ router.patch('/:_id', function (req, res, next) {
         res.json(foodtrucks);
     });
 });
-
 //Delete individual foodtruck by ID
 router.delete('/:_id', function (req, res, next) {
     var id = req.params._id;
@@ -85,5 +79,17 @@ router.delete('/:_id', function (req, res, next) {
         res.json(foodtrucks);
     });
 });
-
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
