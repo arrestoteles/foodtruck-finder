@@ -4,14 +4,35 @@
       <b-col cols="7" offset="1" offset-md="2">
         <b-form-input
           class="form"
-          v-model="text"
-          placeholder="Enter new customer name here"
+          v-model="first_name"
+          placeholder="Enter customer first name here"
           v-bind:b-button-toolbar="createcustomer"
         ></b-form-input>
+        <b-form-input
+          class="form"
+          v-model="last_name"
+          placeholder="Enter customer last name here"
+          v-bind:b-button-toolbar="createcustomer"
+        ></b-form-input>
+        <b-form-input
+          class="form"
+          v-model="email"
+          placeholder="Enter customer email here"
+          v-bind:b-button-toolbar="createcustomer"
+        ></b-form-input>
+        <b-form-input
+          class="form"
+          v-model="password"
+          placeholder="Enter customer password here"
+          v-bind:b-button-toolbar="createcustomer"
+        ></b-form-input>
+        <b-button class="button" pill variant="success" @click="createcustomer">
+          Create new customer
+        </b-button>
+        <b-button class="button" pill variant="danger" @click="deletecustomers">
+          Delete all customers
+        </b-button>
       </b-col>
-      <b-button class="button" pill variant="success" @click="createcustomer">
-        Create new customer
-      </b-button>
       <b-col cols="3"> </b-col>
     </b-row>
     <b-row>
@@ -26,6 +47,7 @@
           v-bind:customer="customer"
           v-on:del-customer="deletecustomer"
           v-on:update-customer="updatecustomer"
+          v-on:del-all-customers="deletecustomers"
         />
       </b-col>
     </b-row>
@@ -42,6 +64,7 @@ export default {
   components: {
     'customer-item': CustomerItem
   },
+
   mounted() {
     console.log('Here is a list of all customers!')
     Api.get('/customers')
@@ -58,6 +81,7 @@ export default {
         console.log('This runs every time after success or error.')
       })
   },
+
   methods: {
     deletecustomer(id) {
       console.log(`Delete customer with id ${id}`)
@@ -69,29 +93,49 @@ export default {
       })
       // TODO: catch error
     },
+
     createcustomer(id) {
       setTimeout(function () {
         window.location.reload()
       }, 0)
       Api.post('/customers', {
-        username: this.text,
-        password: 'password123'
+        first_name: this.first_name,
+        last_name: this.last_name,
+        email: this.email,
+        password: this.password
       }).then((response) => {
         this.customers = response.data.customers
       })
     },
+
     updatecustomer(id) {
       setTimeout(function () {
         window.location.reload()
       }, 0)
-      alert('kladdkaka123')
       Api.patch(`/customers/${id}`, {
-        username: 'mr robot'
+        password: 'Password123'
       }).then((response) => {
         this.customers = response.data.customers
       })
+    },
+
+    deletecustomers() {
+      console.log('Delete all customers!')
+      Api.delete('/customers')
+        .then((response) => {
+          console.log(response)
+          this.customers = response.data.customers
+        })
+        .catch((error) => {
+          this.customers = []
+          console.log(error)
+        })
+        .then(() => {
+          console.log('This runs every time after success or error.')
+        })
     }
   },
+
   data() {
     return {
       customers: [],

@@ -1,8 +1,10 @@
 <template>
   <div class="customer">
     <b-avatar variant="dark"></b-avatar>
-    <div class="detail">Customer name: {{ customer.username }}</div>
-    <div class="detail">Customer password: {{ customer.password }}</div>
+    <div class="detail">First name: {{ customer.first_name }}</div>
+    <div class="detail">Last name: {{ customer.last_name }}</div>
+    <div class="detail">Email: {{ customer.email }}</div>
+    <div class="detail">Password: {{ customer.password }}</div>
     <div class="detail">id: {{ customer._id }}</div>
     <b-button
       class="deletebtn"
