@@ -35,16 +35,50 @@
         >Login</b-button
       >
       <b-button type="reset" pill variant="outline-danger">Reset</b-button>
+      <div>
+        <b-form-group label="Choose your role" v-slot="{ ariaDescribedby }">
+          <b-form-radio
+            id="selection"
+            v-model="selected"
+            :aria-describedby="ariaDescribedby"
+            name="some-radios"
+            value="Admin"
+            >Admin</b-form-radio
+          >
+          <b-form-radio
+            id="selection"
+            v-model="selected"
+            :aria-describedby="ariaDescribedby"
+            name="some-radios"
+            value="Owner"
+            >Owner</b-form-radio
+          >
+          <b-form-radio
+            id="selection"
+            v-model="selected"
+            :aria-describedby="ariaDescribedby"
+            name="some-radios"
+            value="Customer"
+            >Customer</b-form-radio
+          >
+        </b-form-group>
+
+        <div class="mt-3">
+          Selected: <strong>{{ selected }}</strong>
+        </div>
+      </div>
     </b-form>
   </div>
 </template>
 
 <script>
 import { Api } from '@/Api'
+// import { Router } from 'express'
 
 export default {
   data() {
     return {
+      selected: '',
       form: {
         email: '',
         password: ''
@@ -56,18 +90,19 @@ export default {
 
   methods: {
     async login() {
-      setTimeout(function () {}, 0)
       Api.post('/customers/login', {
         email: this.form.email,
         password: this.form.password
       }).then((response) => {
         if (response.status === 200) {
           const id = response.data._id
-          alert(
-            response.status === 200 ? 'Successul Login!' : 'ERROR ON TERROR'
-          )
-          window.location.assign(
-            // http://localhost:8081/customer/${id}
+          /*
+            window.location.assign(
+              // https://limitless-harbor-45889.herokuapp.com/api/customer/${id}
+              `http://localhost:8081/customer/${id}`
+            )
+            */
+          this.$router.push(
             `https://limitless-harbor-45889.herokuapp.com/api/customer/${id}`
           )
           this.customers = response.data.customers

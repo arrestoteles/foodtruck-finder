@@ -9,10 +9,10 @@ var sessions = require('express-session')
 require('dotenv').config();
 
 // Controllers
-var ownerController = require('./controllers/owners')
+var ownersController = require('./controllers/owners')
 var customersController = require('./controllers/customers')
 var dishesController = require('./controllers/dishes')
-var userController = require('./controllers/users')
+var usersController = require('./controllers/users')
 var foodtrucksController = require('./controllers/foodtrucks')
 
 // Variables
@@ -48,11 +48,11 @@ app.use(cors())
 app.get('/api', function (req, res) {
   res.json({ message: 'Check out some of the food trucks!' })
 })
-app.use('/api/users', userController)
+app.use('/api/users', usersController)
 app.use('/api/dishes', dishesController)
 app.use('/api/customers', customersController)
-app.use('/api/owners', ownerController)
-app.use('/api/foodtrucks', foodtrucksController)
+app.use('/api/owners', ownersController)
+app.use('/ap/foodtrucks', foodtrucksController)
 
 // Cookies
 app.use(cookies())

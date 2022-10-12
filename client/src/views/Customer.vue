@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>This is the customer vue</h1>
-    <h2>This is the customer vue</h2>
-    <h3>This is the customer vue</h3>
-    <h4>This is the customer vue</h4>
-    <h5>This is the customer vue</h5>
-    <h6>This is the customer vue</h6>
+    <h1>Customer vue under construction!</h1>
+    <h2>Customer vue under construction!</h2>
+    <h3>Customer vue under construction!</h3>
+    <h4>Customer vue under construction!</h4>
+    <h5>Customer vue under construction!</h5>
+    <h6>Customer vue under construction!</h6>
   </div>
 </template>
 
