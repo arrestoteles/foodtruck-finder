@@ -18,11 +18,6 @@
           </form>
         </div>
         <div class="row">
-          <b-row>
-            <b-col v-for="foodtruck in foodtrucks" v-bind:key="foodtruck._id">
-              <component-food />
-            </b-col>
-          </b-row>
         </div>
       </b-col>
     </b-row>
@@ -32,13 +27,10 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-import ComponentFood from '@/components/ComponentFood.vue'
 
 export default {
   name: 'foodtrucks',
-  components: {
-    'component-food': ComponentFood
-  },
+
   mounted() {
     console.log('Here is a list of all customers!')
     Api.get('/customers')
@@ -135,40 +127,5 @@ body {
   background: lightgrey;
   cursor: pointer;
 }
-.container {
-  width: 100;
-  min-height: 20vh;
-  padding: 5%;
-}
-.search-bar {
-  width: 100;
-  max-width: 700px;
-  max-height: 50%;
-  background: white;
-  display: flex;
-  align-items: center;
-  border-radius: 60px;
-  padding: 5px 10px;
-  backdrop-filter: blur(4px) saturate(180%);
-}
-.search-bar input {
-  background: transparent;
-  flex: 1;
-  border: 0;
-  outline: none;
-  padding: 5px 20px;
-  font-size: 15px;
-  color: grey;
-}
-::placeholder {
-  color: gray;
-}
-.search-bar button {
-  border: 0;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  background: lightgrey;
-  cursor: pointer;
-}
+
 </style>
