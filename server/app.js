@@ -52,7 +52,7 @@ app.use('/api/users', usersController)
 app.use('/api/dishes', dishesController)
 app.use('/api/customers', customersController)
 app.use('/api/owners', ownersController)
-app.use('/ap/foodtrucks', foodtrucksController)
+app.use('/api/foodtrucks', foodtrucksController)
 
 // Cookies
 app.use(cookies())
