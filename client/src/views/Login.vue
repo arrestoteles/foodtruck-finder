@@ -94,18 +94,12 @@ export default {
         email: this.form.email,
         password: this.form.password
       }).then((response) => {
+        const customerID = response.data._id
         if (response.status === 200) {
-          const id = response.data._id
-          /*
-            window.location.assign(
-              // https://limitless-harbor-45889.herokuapp.com/api/customer/${id}
-              `http://localhost:8081/customer/${id}`
-            )
-            */
-          this.$router.push(
-            `https://limitless-harbor-45889.herokuapp.com/api/customer/${id}`
-          )
+          this.$router.push(`customer/${customerID}`)
           this.customers = response.data.customers
+        } else {
+          this.$router.push('admin')
         }
       })
     },

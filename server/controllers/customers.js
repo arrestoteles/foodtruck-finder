@@ -3,7 +3,8 @@ var router = express.Router()
 var Customer = require('../models/customer')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { response } = require('../app');
+const auth = require('../middleware/auth')
+var Foodtruck = require('../models/foodtruck')
 
 // Return a list of all customers
 router.get('/', function (req, res, next) {
@@ -12,6 +13,61 @@ router.get('/', function (req, res, next) {
       return next(err)
     }
     res.status(200).json({ 'customers': customers })
+  })
+})
+
+router.get('/:id/foodtrucks', function (req, res, next) {
+  var id = req.params.id
+  Customer.findById(id).populate('foodtrucks').exec(function (err, customer) {
+    if (err) return handleError(err);
+    console.log(`Customer favorite is ${customer.foodtrucks}`);
+    res.status(200).json(customer)
+  })
+})
+
+router.post('/:id/foodtrucks', function (req, res, next) {
+  // Create the foodtruck
+  const foodtruck = new Foodtruck({
+    name: "druner",
+    color: "green"
+  })
+  console.log(foodtruck);
+  // Save refs to other documents
+  foodtruck.save(function (err, new_req) {
+    if (err) {
+      return res.status(500).send(err)
+    }
+  })
+  // Populate our customer's foodtrucks using the query builder
+  const customerId = req.params.id
+  Customer.
+    findById(customerId).
+    populate('foodtrucks').
+    exec(function (err, customer) {
+    if (err) {
+      return handleError(err)
+    } else {
+      console.log(`Customer's foodtruck is ${customer}`);
+      res.status(200).json(foodtruck)
+    }
+    })
+  })
+
+router.get('/:id/foodtrucks/:id', function (req, res, next) {
+  var id = req.params.id
+  Customer.findById(id).populate('foodtrucks').exec(function (err, customer) {
+    if (err) return handleError(err);
+    console.log(`Customer favorite is ${customer.foodtrucks.name}`);
+    res.status(200).json(customer)
+  })
+})
+
+router.delete('/:id/foodtrucks/:id', function (req, res, next) {
+  var id = req.params.id
+  Customer.findById(id).populate('favorite').exec(function (err, customer) {
+    if (err) return handleError(err);
+    console.log(`Customer favorite is ${customer.favorite.name}`);
+    res.status(200).json(customer)
   })
 })
 
@@ -80,6 +136,7 @@ router.post("/login", async (req, res) => {
     }
     // Validate if user exist in our database
     const user = await Customer.findOne({ email });
+    console.log(user);
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
@@ -104,7 +161,7 @@ router.post("/login", async (req, res) => {
     console.log(err);
   }
   // Our register logic ends here
-});
+})
 
 // Return the customers with the given ID
 router.get('/:id', function (req, res, next) {
