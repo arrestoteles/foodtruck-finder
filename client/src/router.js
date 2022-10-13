@@ -9,6 +9,19 @@ import Customer from './views/Customer.vue'
 
 Vue.use(Router)
 
+function guardMyroute(to, from, next) {
+  let isAuthenticated = false
+  if (localStorage.getItem('LoggedUser')) {
+    isAuthenticated = true
+  }
+
+  if (isAuthenticated) {
+    next()
+  } else {
+    next('/admin')
+  }
+}
+
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -21,7 +34,8 @@ export default new Router({
     {
       path: '/admin',
       name: 'admin',
-      component: Admin
+      component: Admin,
+      beforeEnter: guardMyroute
     },
     {
       path: '/login',
@@ -41,7 +55,8 @@ export default new Router({
     {
       path: '/customer/:id',
       name: 'customer',
-      component: Customer
+      component: Customer,
+      beforeEnter: guardMyroute
     }
   ]
 })
