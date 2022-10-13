@@ -32,14 +32,6 @@ router.get('/api/foodtruck/:_id/dishes', function (req, res, next) {
     });
 });
 
-//Get all users
-router.get('/api/foodtrucks', function (req, res, next) {
-    foodtruck.find(function (err, users) {
-        if (err) { return next(err); }
-        res.json({ "foodtrucks": foodtrucks });
-    });
-})
-
 //Get all foodtrucks
 router.get('/', function (req, res, next) {
     Foodtruck.find(function (err, foodtrucks) {

@@ -4,7 +4,9 @@ var Customer = require('../models/customer')
 var bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth')
-var Foodtruck = require('../models/foodtruck')
+var Foodtruck = require('../models/foodtruck');
+const customer = require('../models/customer');
+const mongoose = require('mongoose');
 
 // Return a list of all customers
 router.get('/', function (req, res, next) {
@@ -16,43 +18,42 @@ router.get('/', function (req, res, next) {
   })
 })
 
+// Return all foodtrucks for a specific customer given the ID
 router.get('/:id/foodtrucks', function (req, res, next) {
-  var id = req.params.id
-  Customer.findById(id).populate('foodtrucks').exec(function (err, customer) {
+  var customerId = req.params.id
+  Customer.findOne({ _id: customerId }).exec(function (err, customer) {
     if (err) return handleError(err);
-    console.log(`Customer favorite is ${customer.foodtrucks}`);
-    res.status(200).json(customer)
+    console.log(customer.foodtrucks);
+    res.status(200).json(customer.foodtrucks)
   })
 })
 
+// Create a foodtruck for a specific customer given the ID
 router.post('/:id/foodtrucks', function (req, res, next) {
-  // Create the foodtruck
-  const foodtruck = new Foodtruck({
-    name: "druner",
-    color: "green"
-  })
-  console.log(foodtruck);
-  // Save refs to other documents
-  foodtruck.save(function (err, new_req) {
-    if (err) {
-      return res.status(500).send(err)
-    }
-  })
-  // Populate our customer's foodtrucks using the query builder
   const customerId = req.params.id
-  Customer.
-    findById(customerId).
-    populate('foodtrucks').
-    exec(function (err, customer) {
-    if (err) {
-      return handleError(err)
-    } else {
-      console.log(`Customer's foodtruck is ${customer}`);
-      res.status(200).json(foodtruck)
-    }
+
+  Customer.findOne({ _id: customerId }, function(error, customer) {
+    customer.save(function (err) {
+      if (err) return handleError(err);
+    
+      const foodtruck = new Foodtruck({
+        name: 'Campanello',
+        color: 'green'
+      })
+    
+      foodtruck.save(function (err) {
+        if (err) return handleError(err);
+      })
+
+      customer.foodtrucks = foodtruck
+      customer.save()
+      console.log(customer.foodtrucks)
+      res.status(201).json({foodtruck})
     })
   })
+})
 
+// Return a specific foodtruck from a specific customer, given the ID(s)
 router.get('/:id/foodtrucks/:id', function (req, res, next) {
   var id = req.params.id
   Customer.findById(id).populate('foodtrucks').exec(function (err, customer) {
@@ -62,6 +63,7 @@ router.get('/:id/foodtrucks/:id', function (req, res, next) {
   })
 })
 
+// Delete a specific foodtruck from a specific customer, given the ID(s)
 router.delete('/:id/foodtrucks/:id', function (req, res, next) {
   var id = req.params.id
   Customer.findById(id).populate('favorite').exec(function (err, customer) {
@@ -71,7 +73,7 @@ router.delete('/:id/foodtrucks/:id', function (req, res, next) {
   })
 })
 
-// Create a new customer
+// Create a new customer along with validation and encryption
 router.post('/', async (req, res) => {
 
   // Our register logic starts here
@@ -124,6 +126,7 @@ router.post('/', async (req, res) => {
   // Our register logic ends here
 })
 
+// Login a specific customer if email and password correct
 router.post("/login", async (req, res) => {
   // Our login logic starts here
   try {
@@ -191,7 +194,7 @@ router.delete('/:id', function (req, res, next) {
   })
 })
 
-// Delete all customers from the database
+// Delete all customers
 router.delete('/', function(req, res, next) {
   Customer.deleteMany(function (err, customer) {
     if (err) {

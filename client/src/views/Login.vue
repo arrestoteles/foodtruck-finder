@@ -96,6 +96,7 @@ export default {
       }).then((response) => {
         const customerID = response.data._id
         if (response.status === 200) {
+          localStorage.setItem('LoggedUser', JSON.stringify(customerID))
           this.$router.push(`customer/${customerID}`)
           this.customers = response.data.customers
         } else {
