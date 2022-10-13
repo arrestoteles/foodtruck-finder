@@ -21,6 +21,7 @@
           v-bind:b-button-toolbar="createcustomer"
         ></b-form-input>
         <b-form-input
+          type="password"
           class="form"
           v-model="password"
           placeholder="Enter customer password here"
@@ -48,6 +49,7 @@
           v-on:del-customer="deletecustomer"
           v-on:update-customer="updatecustomer"
           v-on:del-all-customers="deletecustomers"
+          v-on:reset-customer="resetcustomer"
         />
       </b-col>
     </b-row>
@@ -114,6 +116,20 @@ export default {
       }, 0)
       Api.patch(`/customers/${id}`, {
         password: 'Password123'
+      }).then((response) => {
+        this.customers = response.data.customers
+      })
+    },
+
+    resetcustomer(id) {
+      setTimeout(function () {
+        window.location.reload()
+      }, 0)
+      Api.put(`/customers/${id}`, {
+        first_name: 'John',
+        last_name: 'Smith',
+        email: 'sexy_boy89@hotmail.com',
+        password: 'NewPassword123'
       }).then((response) => {
         this.customers = response.data.customers
       })

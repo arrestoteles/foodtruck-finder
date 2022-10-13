@@ -6,6 +6,7 @@
     <div class="detail">Email: {{ customer.email }}</div>
     <div class="detail">Password: {{ customer.password }}</div>
     <div class="detail">id: {{ customer._id }}</div>
+    <div class="detail">Foodtrucks: {{ customer.foodtrucks }}</div>
     <b-button
       class="deletebtn"
       pill
@@ -19,6 +20,13 @@
       variant="primary"
       v-on:click="$emit('update-customer', customer._id)"
       >Update</b-button
+    >
+    <b-button
+      class="resetbtn"
+      pill
+      variant="info"
+      v-on:click="$emit('reset-customer', customer._id)"
+      >Reset</b-button
     >
   </div>
 </template>
