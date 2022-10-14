@@ -7,16 +7,16 @@
         <h1 class="header1">Foodtrucks</h1>
 
         <div class="container">
-          <form
+          <b-form
             class="search-bar"
           >
             <input v-model="text" placeholder="search any foodtruck" name="q" />
-            <button type="submit" @click="searching">
+            <b-button type="submit" @click="searching">
               <img
                 src="https://img.icons8.com/color/20/FA5252/search--v1.png"
               />
-            </button>
-          </form>
+            </b-button>
+          </b-form>
         </div>
         </b-col>
     </b-row>
@@ -136,6 +136,7 @@ body {
 .container {
   min-height: 100%;
   padding: 5%;
+  margin-bottom: 500px;
 }
 .search-bar {
 max-height: 70%;
