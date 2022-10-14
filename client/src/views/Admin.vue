@@ -47,6 +47,7 @@
       >
         <customer-item
           v-bind:customer="customer"
+          v-bind:customer-foodtruck="foodtruck"
           v-on:del-customer="deletecustomer"
           v-on:update-customer="updatecustomer"
           v-on:del-all-customers="deletecustomers"
@@ -77,6 +78,20 @@ export default {
       })
       .catch((error) => {
         this.customers = []
+        console.log(error)
+        //   TODO: display some error message instead of logging to console
+      })
+      .then(() => {
+        console.log('This runs every time after success or error.')
+      })
+
+    Api.get('/foodtrucks')
+      .then((response) => {
+        console.log(response)
+        this.foodtrucks = response.data.foodtrucks
+      })
+      .catch((error) => {
+        this.foodtrucks = []
         console.log(error)
         //   TODO: display some error message instead of logging to console
       })
@@ -156,6 +171,7 @@ export default {
   data() {
     return {
       customers: [],
+      foodtrucks: [],
       text: ''
     }
   }
@@ -169,5 +185,6 @@ export default {
 }
 .button {
   text-align: center;
+  margin-right: 5px;
 }
 </style>
