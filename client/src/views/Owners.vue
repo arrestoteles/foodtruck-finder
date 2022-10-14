@@ -1,21 +1,17 @@
 <template>
   <b-container fluid="md" class="myContainer">
     <b-row>
-      <b-col cols="8" offset="1" offset-md="2">
+      <b-col cols="3"></b-col>
+      <b-col cols="6">
         <div class="container">
           <form
             class="search-bar"
           >
-            <input v-model="text" placeholder="search any foodtruck" name="q" />
-            <button type="submit" @click="searching">
-              <img
-                src="https://img.icons8.com/color/20/FA5252/search--v1.png"
-              />
-            </button>
+            <input v-model="text" placeholder="search any foodtruck..." name="q" />
           </form>
         </div>
           <b-row>
-           <b-col cols="8" offset="1" offset-md="2">
+           <b-col cols="12">
         <b-form-input
           class="form"
           v-model="foodtruck_name"
@@ -25,7 +21,7 @@
            </b-col>
           </b-row>
       </b-col>
-      <b-col cols="8" offset-md="2">
+      <b-col cols="12">
         <div class="containerbutton">
       <b-button  pill variant="success" @click="createfoodtruck">
         Create new foodtruck
