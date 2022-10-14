@@ -136,7 +136,6 @@ body {
 .container {
   min-height: 100%;
   padding: 5%;
-  margin-bottom: 500px;
 }
 .search-bar {
 max-height: 70%;
