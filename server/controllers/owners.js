@@ -2,6 +2,17 @@ var express = require('express')
 var router = express.Router()
 var Owner = require('../models/owner')
 
+// Return all foodtrucks for a specific owner given the ID
+router.get('/:id/foodtrucks', function (req, res, next) {
+  var ownerId = req.params.id
+  Owner.findOne({ _id: ownerId }).exec(function (err, owner) {
+    if (err) return handleError(err);
+    console.log(owner.foodtrucks);
+    res.status(200).json(owner.foodtrucks)
+  })
+})
+
+
 // Create a new owner
 router.post('/', function (req, res, next) {
   var owner = new Owner(req.body)

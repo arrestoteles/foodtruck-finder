@@ -4,7 +4,7 @@ var router = express.Router();
 var Foodtruck = require('../models/foodtruck');
 
 
-// Return all dishes for a specific foodtruck
+// Return all dishes for a specific foodtruck given the ID
 router.get('/:id/dishes', function (req, res, next) {
     var foodtruckId = req.params.id
     Foodtruck.findOne({ _id: foodtruckId }).exec(function (err, foodtruck) {
