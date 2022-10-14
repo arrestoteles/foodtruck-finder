@@ -1,7 +1,8 @@
 <template>
   <b-container fluid="md" class="myContainer">
     <b-row>
-      <b-col cols="7" offset="1" offset-md="2">
+      <b-col md="3" sm="1"></b-col>
+      <b-col md="6" sm="10">
         <b-form-input
           class="form"
           v-model="first_name"
@@ -33,7 +34,7 @@
           Delete all customers
         </b-button>
       </b-col>
-      <b-col cols="3"> </b-col>
+      <b-col md="3" sm="1"> </b-col>
     </b-row>
     <b-row>
       <b-col
