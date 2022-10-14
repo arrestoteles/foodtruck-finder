@@ -3,7 +3,7 @@
     <b-container>
 
     <b-row>
-      <b-col cols="8" offset="1" offset-md="2">
+      <b-col cols="12">
         <h1 class="header1">Foodtrucks</h1>
 
         <div class="container">
@@ -19,10 +19,10 @@
           </form>
         </div>
         </b-col>
-        </b-row>
+    </b-row>
 
           <b-row>
-      <b-col cols="12" sm="6" md="4"
+      <b-col sm="12" md="6" lg="4"
         v-for="foodtruck in foodtrucks"
         v-bind:key="foodtruck._id"
       >
@@ -118,7 +118,6 @@ export default {
 }
 .header1 {
   font-family: sans-serif;
-  padding-left: 175px;
   text-align: center;
   text-shadow: 2px 2px 10px #05cc16;
   font-weight: bold;
