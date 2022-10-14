@@ -1,45 +1,61 @@
 <template>
   <body>
+    <b-container>
+
     <b-row>
-      <b-col cols="7" offset="1" offset-md="2">
+      <b-col cols="8" offset="1" offset-md="2">
         <h1 class="header1">Foodtrucks</h1>
+
         <div class="container">
           <form
-            action="https://WWWW.google.com"
-            method="get"
             class="search-bar"
           >
-            <input type="text" placeholder="search any foodtruck" name="q" />
-            <button type="submit">
+            <input v-model="text" placeholder="search any foodtruck" name="q" />
+            <button type="submit" @click="searching">
               <img
                 src="https://img.icons8.com/color/20/FA5252/search--v1.png"
               />
             </button>
           </form>
         </div>
-        <div class="row">
-        </div>
-      </b-col>
-    </b-row>
+        </b-col>
+        </b-row>
+
+          <b-row>
+      <b-col cols="12" sm="6" md="4"
+        v-for="foodtruck in foodtrucks"
+        v-bind:key="foodtruck._id"
+      >
+          <component-food
+          v-if="foodtruck.name === text"
+           v-bind:foodtruck="foodtruck"
+          />
+           </b-col>
+        </b-row>
+</b-container>
   </body>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import ComponentFood from '../components/ComponentFood.vue'
 
 export default {
   name: 'foodtrucks',
+  components: {
+    ComponentFood
+  },
 
   mounted() {
-    console.log('Here is a list of all customers!')
-    Api.get('/customers')
+    console.log('Here is a list of all foodtrucks!')
+    Api.get('/foodtrucks')
       .then((response) => {
         console.log(response)
-        this.customers = response.data.customers
+        this.foodtrucks = response.data.foodtrucks
       })
       .catch((error) => {
-        this.customers = []
+        this.foodtrucks = []
         console.log(error)
         //   TODO: display some error message instead of logging to console
       })
@@ -47,19 +63,46 @@ export default {
         console.log('This runs every time after success or error.')
       })
   },
-
   methods: {
-    getMessage() {
-      Api.get('/')
-        .then((response) => {
-          this.message = response.data.message
-        })
-        .catch((error) => {
-          this.message = error
-        })
+    deletefoodtruck(id) {
+      console.log(`Delete foodtruck with id ${id}`)
+      Api.delete(`/foodtrucks/${id}`).then((response) => {
+        const index = this.foodtrucks.findIndex(
+          (foodtruck) => foodtruck._id === id
+        )
+        this.foodtrucks.splice(index, 1)
+      })
+      // TODO: catch error
+    },
+    createfoodtruck(id) {
+      setTimeout(function () {
+        window.location.reload()
+      }, 0)
+      Api.post('/foodtrucks', {
+        name: this.foodtruck_name,
+        color: 'blue'
+      }).then((response) => {
+        this.foodtrucks = response.data.foodtrucks
+      })
+    },
+    updatefoodtruck(id) {
+      setTimeout(function () {
+        window.location.reload()
+      }, 0)
+      alert('kladdkaka123')
+      Api.patch(`/foodtrucks/${id}`, {
+        name: 'mr robot'
+      }).then((response) => {
+        this.foodtrucks = response.data.foodtrucks
+      })
+    },
+    searching(text) {
+      Api.get(`/foodtrucks?name=${this.text}`).then((response) => {
+        console.log(response)
+        this.foodtrucks = response.data.foodtrucks
+      })
     }
   },
-
   data() {
     return {
       foodtrucks: [],
@@ -83,7 +126,7 @@ export default {
 
 body {
   background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-color: #45d03b;
   background-size: cover;
   background-position: center;
@@ -92,20 +135,18 @@ body {
   overflow: hidden;
 }
 .container {
-  width: 100;
-  min-height: 20vh;
+  min-height: 100%;
   padding: 5%;
 }
 .search-bar {
-  width: 100;
-  max-width: 700px;
-  max-height: 50%;
+max-height: 70%;
   background: white;
   display: flex;
   align-items: center;
   border-radius: 60px;
-  padding: 5px 10px;
   backdrop-filter: blur(4px) saturate(180%);
+  padding: 5px 5px;
+  padding-bottom: 10px;
 }
 .search-bar input {
   background: transparent;
@@ -115,16 +156,17 @@ body {
   padding: 5px 20px;
   font-size: 15px;
   color: grey;
+   align-items: center;
 }
 ::placeholder {
   color: gray;
 }
 .search-bar button {
-  border: 0;
+   border: 0;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  background: lightgrey;
+  width: 35px;
+  height: 33px;
+  background: lightgray;
   cursor: pointer;
 }
 

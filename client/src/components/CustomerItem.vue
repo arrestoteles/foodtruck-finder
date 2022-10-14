@@ -31,13 +31,13 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) {
   .detail {
     display: none;
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (max-width: 767px) {
   .more-info {
     color: rgb(0, 0, 0);
   }
