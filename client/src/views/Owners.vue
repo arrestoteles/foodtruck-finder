@@ -1,7 +1,7 @@
 <template>
   <b-container fluid="md" class="myContainer">
     <b-row>
-      <b-col cols="3git "></b-col>
+      <b-col cols="3"></b-col>
       <b-col cols="6">
         <div class="container">
           <form
