@@ -45,7 +45,7 @@ router.post('/:id/foodtrucks', function (req, res, next) {
         if (err) return handleError(err);
       })
 
-      customer.foodtrucks = foodtruck
+      customer.foodtrucks.push(foodtruck)
       customer.save()
       console.log(customer.foodtrucks)
       res.status(201).json({foodtruck})
