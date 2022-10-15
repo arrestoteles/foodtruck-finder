@@ -6,7 +6,7 @@ var customerSchema = new Schema({
   last_name: { type: String },
   email: { type: String },
   password: { type: String },
-  foodtrucks: { type: Schema.Types.ObjectId, ref: 'foodtrucks' },
+  foodtrucks: [{ type: Schema.Types.ObjectId, ref: 'foodtrucks' }],
   token: { type: String }
 })
 

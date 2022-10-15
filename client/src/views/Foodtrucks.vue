@@ -138,7 +138,7 @@ body {
   padding: 5%;
 }
 .search-bar {
-max-height: 70%;
+  max-height: 70%;
   background: white;
   display: flex;
   align-items: center;
@@ -155,18 +155,17 @@ max-height: 70%;
   padding: 5px 20px;
   font-size: 15px;
   color: grey;
-   align-items: center;
+  align-items: center;
 }
 ::placeholder {
   color: gray;
 }
 .search-bar button {
-   border: 0;
+  border: 0;
   border-radius: 50%;
   width: 35px;
   height: 33px;
   background: lightgray;
   cursor: pointer;
 }
-
 </style>
