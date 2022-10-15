@@ -58,7 +58,6 @@ router.get('/:id/foodtrucks/:id', function (req, res, next) {
   var id = req.params.id
   Customer.findById(id).populate('foodtrucks').exec(function (err, customer) {
     if (err) return handleError(err);
-    console.log(`Customer favorite is ${customer.foodtrucks.name}`);
     res.status(200).json(customer)
   })
 })
