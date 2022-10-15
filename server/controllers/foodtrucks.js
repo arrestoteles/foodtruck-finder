@@ -2,7 +2,7 @@ var express = require('express');
 const foodtruck = require('../models/foodtruck');
 var router = express.Router();
 var Foodtruck = require('../models/foodtruck');
-
+var Dish = require('../models/dish')
 
 // Return all dishes for a specific foodtruck given the ID
 router.get('/:id/dishes', function (req, res, next) {
@@ -23,16 +23,24 @@ router.post('/', function (req, res, next) {
     })
 });
 
-// Dish for foodtruck
-router.post('/api/foodtrucks/:_id/dishes', function (req, res, next) {
-    var dish = new dish(req.body);
-    dish.user_id = req.params._id;
-    dish.save(function (err, dish) {
-        if (err) {
-            return next(err);
-        }
-        res.status(201).json(dish);
-    })
+// Create a dish for a specific foodtruck given the ID
+router.post('/:id/dishes', function (req, res) {
+
+	const { name, price } = req.body
+  const dish = new Dish({
+    name,
+    price
+  })
+  
+	const foodtruckId = req.params.id
+  Foodtruck.findById(foodtruckId).
+  populate('dishes').
+  exec(function (err, foodtruck) {
+    if (err) return handleError(err)
+  foodtruck.dishes.push(dish)
+  foodtruck.save()
+  res.status(201).json(dish)
+  })
 })
 
 //Get all dishes of specific foodtruck
