@@ -1,6 +1,6 @@
-var express = require('express')
-var router = express.Router()
-var Owner = require('../models/owner')
+var express = require('express');
+var router = express.Router();
+var Owner = require('../models/owner');
 
 // Create a new owner
 router.post('/', function (req, res, next) {
@@ -19,37 +19,33 @@ router.get('/', function (req, res, next) {
     if (err) {
       return next(err)
     }
-    res.json({ 'owners': owners })
+    res.status(200).json({ 'owners': owners })
   })
 })
 
-// Return the owners with the given ID
+// Get by ID
 router.get('/:_id', function (req, res, next) {
-  var id = req.params.id
-  Owner.findById(id, function (err, owner) {
-    if (err) {
-      return next(err)
-    }
-    if (owner === null) {
-      return res.status(404).json({ message: 'Owner not found' })
-    }
-    res.json(owner)
-  })
-})
+  var id = req.params._id;
+  Owner.findById(id, function (err, Owner) {
+      if (err) { return next(err); }
+      if (Owner == null) {
+          return res.status(404).json({ "message": "Owner not found" });
+      }
+      res.status(200).json(Owner);
+  });
+});
 
-// Delete the owner with the given ID
-router.delete('/:_id', function (req, res, next) {
-  var id = req.params.id
-  Owner.findOneAndDelete({ _id: id }, function (err, owner) {
-    if (err) {
-      return next(err)
-    }
-    if (owner === null) {
-      return res.status(404).json({ message: 'Owner not found' })
-    }
-    res.json(owner)
-  })
-})
+// Delete by ID
+router.delete('/:id', function (req, res, next) {
+  var id = req.params._id;
+  Owner.findOneAndDelete({ _id: id }, function (err, Owner) {
+      if (err) { return next(err); }
+      if (Owner == null) {
+          return res.status(404).json({ "message": "Owner not found" });
+      }
+      res.status(204).json(Owner);
+  });
+});
 
 // Delete all owners from the database
 router.delete('/', function(req, res, next) {
@@ -57,8 +53,38 @@ router.delete('/', function(req, res, next) {
     if (err) {
       return next(err)
     }
-    res.json(owner)
+    res.status(204).json(owner)
   })
 }) 
+
+// Put by ID
+router.put('/:id', function (req, res, next) {
+  var id = req.params.id;
+  Owner.findById(id, function (err, owners) {
+      if (err) { return next(err); }
+      if (owners == null) {
+          return res.status(404).json({ "message": "owners not found" });
+      }
+      owners.username = req.body.username
+      owners.password = req.body.password
+      owners.save();
+      res.status(200).json(owners)
+  });
+});
+
+// Patch by ID
+router.patch('/:id', function (req, res, next) {
+  var id = req.params.id;
+  Owner.findById(id, function (err, owners) {
+      if (err) { return next(err); }
+      if (owners == null) {
+          return res.status(404).json({ "message": "owners not found" });
+      }
+      owners.username = (req.body.username || owners.username);
+      owners.password = (req.body.password || owners.password);
+      owners.save();
+      res.status(200).json(owners)
+  });
+});
 
 module.exports = router
