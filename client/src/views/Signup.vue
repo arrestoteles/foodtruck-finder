@@ -44,8 +44,12 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" pill variant="primary">Sign up</b-button>
-      <b-button type="reset" pill variant="outline-info">Reset</b-button>
+      <b-button class="signupbtn" type="submit" pill variant="primary"
+        >Sign up</b-button
+      >
+      <b-button class="resetbtn" type="reset" pill variant="outline-info"
+        >Reset</b-button
+      >
     </b-form>
   </div>
 </template>
@@ -104,5 +108,13 @@ export default {
   background-color: #bedcdc;
   margin: 0 auto;
   width: 80%; /* value of your choice which suits your alignment */
+}
+.signupbtn {
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.resetbtn {
+  margin-left: 5px;
+  margin-bottom: 10px;
 }
 </style>
