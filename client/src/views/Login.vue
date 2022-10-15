@@ -117,4 +117,7 @@ export default {
 .resetbtn {
   margin-left: 5px;
 }
+.rolebtn {
+  margin-bottom: 10px;
+}
 </style>

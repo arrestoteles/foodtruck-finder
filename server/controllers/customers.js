@@ -36,9 +36,10 @@ router.post('/:id/foodtrucks', function (req, res, next) {
     customer.save(function (err) {
       if (err) return handleError(err);
     
+      const { name, color } = req.body
       const foodtruck = new Foodtruck({
-        name: 'Campanello',
-        color: 'green'
+        name,
+        color
       })
     
       foodtruck.save(function (err) {
@@ -55,11 +56,15 @@ router.post('/:id/foodtrucks', function (req, res, next) {
 
 // Return a specific foodtruck from a specific customer, given the ID(s)
 router.get('/:id/foodtrucks/:id', function (req, res, next) {
-  var id = req.params.id
-  Customer.findById(id).populate('foodtrucks').exec(function (err, customer) {
+  console.log(req.params.id);
+  const customerId = req.params.id
+  const foodtruckId = req.params.id
+  console.log(customerId)
+  console.log(foodtruckId)
+  Customer.findById(customerId).populate('foodtrucks').exec(function (err, customer) {
     if (err) return handleError(err);
-    console.log(`Customer favorite is ${customer.foodtrucks.name}`);
-    res.status(200).json(customer)
+    Foodtruck.deleteOne({ foodtruckId })
+    res.status(204).json({"message": "successfully deleted foodtruck!"})
   })
 })
 
