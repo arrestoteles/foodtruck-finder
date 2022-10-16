@@ -195,7 +195,7 @@ router.delete('/:id', function (req, res, next) {
     if (customer === null) {
       return res.status(404).json({ message: 'Customer not found' })
     }
-    res.status(200).json(customer)
+    res.status(204).json(customer)
   })
 })
 
@@ -222,7 +222,7 @@ router.put('/:id', function(req, res, next) {
         customer.email = req.body.email
         customer.password = req.body.password
         customer.save()
-        res.status(204).json(customer)
+        res.status(200).json(customer)
     })
 })
 
@@ -239,7 +239,7 @@ router.patch('/:id', function(req, res, next) {
       customer.email = (req.body.email || customer.email)
       customer.password = (req.body.password || customer.password)
       customer.save()
-      res.status(204).json(customer)
+      res.status(200).json(customer)
   })
 })
 
