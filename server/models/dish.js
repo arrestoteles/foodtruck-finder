@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 
 var dishSchema = new Schema ({
     name: { type: String},
-    price: { type: Number}
-})
-
+    price: { type: String}
+});
 module.exports = mongoose.model('dishes', dishSchema);

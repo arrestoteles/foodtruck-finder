@@ -55,7 +55,7 @@ router.get('/api/foodtruck/:_id/dishes', function (req, res, next) {
 router.get('/', function (req, res, next) {
     Foodtruck.find(function (err, foodtrucks) {
         if (err) { return next(err); }
-        res.json({ "foodtrucks": foodtrucks });
+        res.status(200).json({ "foodtrucks": foodtrucks });
     });
 });
 
@@ -67,7 +67,7 @@ router.get('/:_id', function (req, res, next) {
         if (foodtrucks == null) {
             return res.status(404).json({ "message": "foodtruck not found" });
         }
-        res.json(foodtrucks);
+        res.status(200).json(foodtrucks);
     });
 });
 
@@ -82,7 +82,7 @@ router.patch('/:_id', function (req, res, next) {
         foodtrucks.name = (req.body.name || foodtrucks.name);
         foodtrucks.color = (req.body.color || foodtrucks.color);
         foodtrucks.save();
-        res.json(foodtrucks);
+        res.status(200).json(foodtrucks)
     });
 });
 
@@ -94,17 +94,34 @@ router.delete('/:_id', function (req, res, next) {
         if (foodtrucks == null) {
             return res.status(404).json({ "message": "foodtruck not found" });
         }
-        res.json(foodtrucks);
+        res.status(204).json(foodtrucks);
     });
 });
 
+
+
+// Put by ID
+router.put('/:id', function (req, res, next) {
+    var id = req.params.id;
+    Foodtruck.findById(id, function (err, foodtrucks) {
+        if (err) { return next(err); }
+        if (foodtrucks == null) {
+            return res.status(404).json({ "message": "foodtruck not found" });
+        }
+        foodtrucks.name = req.body.name
+        foodtrucks.password = req.body.password
+        foodtrucks.save();
+        res.status(200).json(foodtrucks)
+    });
+  });
+
+// Delete all
 router.delete('/', function(req, res, next) {
     Foodtruck.deleteMany(function (err, foodtruck) {
       if (err) {
         return next(err)
       }
-      res.status(200).json(foodtruck)
+      res.status(204).json(foodtruck)
     })
   })
-
 module.exports = router;
