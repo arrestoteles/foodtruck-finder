@@ -31,41 +31,23 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button @click.prevent="login" type="submit" pill variant="primary"
+      <b-button
+        class="loginbtn"
+        @click.prevent="login"
+        type="submit"
+        pill
+        variant="primary"
         >Login</b-button
       >
-      <b-button type="reset" pill variant="outline-danger">Reset</b-button>
+      <b-button class="resetbtn" type="reset" pill variant="outline-danger"
+        >Reset</b-button
+      >
       <div>
-        <b-form-group label="Choose your role" v-slot="{ ariaDescribedby }">
-          <b-form-radio
-            id="selection"
-            v-model="selected"
-            :aria-describedby="ariaDescribedby"
-            name="some-radios"
-            value="Admin"
-            >Admin</b-form-radio
-          >
-          <b-form-radio
-            id="selection"
-            v-model="selected"
-            :aria-describedby="ariaDescribedby"
-            name="some-radios"
-            value="Owner"
-            >Owner</b-form-radio
-          >
-          <b-form-radio
-            id="selection"
-            v-model="selected"
-            :aria-describedby="ariaDescribedby"
-            name="some-radios"
-            value="Customer"
-            >Customer</b-form-radio
-          >
-        </b-form-group>
-
-        <div class="mt-3">
-          Selected: <strong>{{ selected }}</strong>
-        </div>
+        <b-dropdown class="rolebtn" right text="Choose your role">
+          <b-dropdown-item>Admin</b-dropdown-item>
+          <b-dropdown-item>Owner</b-dropdown-item>
+          <b-dropdown-item>Customer</b-dropdown-item>
+        </b-dropdown>
       </div>
     </b-form>
   </div>
@@ -73,7 +55,6 @@
 
 <script>
 import { Api } from '@/Api'
-// import { Router } from 'express'
 
 export default {
   data() {
@@ -126,5 +107,17 @@ export default {
   background-color: #fff8f0;
   margin: 0 auto;
   width: 80%; /* value of your choice which suits your alignment */
+}
+.rolebtn {
+  margin-top: 10px;
+}
+.loginbtn {
+  margin-right: 5px;
+}
+.resetbtn {
+  margin-left: 5px;
+}
+.rolebtn {
+  margin-bottom: 10px;
 }
 </style>

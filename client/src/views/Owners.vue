@@ -21,10 +21,15 @@
            </b-col>
           </b-row>
       </b-col>
-      <b-col cols="12">
+      <b-col cols="12" >
         <div class="containerbutton">
       <b-button  pill variant="success" @click="createfoodtruck">
         Create new foodtruck
+      </b-button>
+        </div>
+         <div>
+      <b-button  pill variant="success" @click="updatefoodtruck">
+        Edit foodtruck
       </b-button>
         </div>
       </b-col>
@@ -170,5 +175,4 @@ export default {
   min-height: 5%;
   padding: 5%;
 }
-
 </style>
