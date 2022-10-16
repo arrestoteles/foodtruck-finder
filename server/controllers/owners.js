@@ -47,14 +47,14 @@ router.get('/:_id', function (req, res, next) {
 });
 
 // Delete by ID
-router.delete('/:id', function (req, res, next) {
+router.delete('/:_id', function (req, res, next) {
   var id = req.params._id;
-  Owner.findOneAndDelete({ _id: id }, function (err, Owner) {
+  Owner.findOneAndDelete({ _id: id }, function (err, owner) {
       if (err) { return next(err); }
-      if (Owner == null) {
-          return res.status(404).json({ "message": "Owner not found" });
+      if (owner == null) {
+          return res.status(404).json({ "message": "owner not found" });
       }
-      res.status(204).json(Owner);
+      res.status(204).json(owner);
   });
 });
 
