@@ -200,7 +200,7 @@ router.delete('/', function(req, res, next) {
     if (err) {
       return next(err)
     }
-    res.status(200).json(customer)
+    res.status(204).json(customer)
   })
 }) 
 
