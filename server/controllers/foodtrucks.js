@@ -64,7 +64,7 @@ router.get('/:_id', function (req, res, next) {
     var id = req.params._id;
     Foodtruck.findById(id, function (err, foodtrucks) {
         if (err) { return next(err); }
-        if (foodtrucks == null) {
+        if (foodtrucks === null) {
             return res.status(404).json({ "message": "foodtruck not found" });
         }
         res.status(200).json(foodtrucks);
@@ -88,17 +88,12 @@ router.patch('/:_id', function (req, res, next) {
 
 //Delete individual foodtruck by ID
 router.delete('/:_id', function (req, res, next) {
-    var id = req.params._id;
-    Foodtruck.findOneAndDelete({ _id: id }, function (err, foodtrucks) {
-        if (err) { return next(err); }
-        if (foodtrucks == null) {
-            return res.status(404).json({ "message": "foodtruck not found" });
-        }
-        res.status(204).json(foodtrucks);
-    });
+  var id = req.params._id;
+  Foodtruck.findOneAndDelete({ _id: id }, function (err, foodtrucks) {
+    if (err) { return next(err); }
+    res.status(204).json(foodtrucks);
+  });
 });
-
-
 
 // Put by ID
 router.put('/:id', function (req, res, next) {

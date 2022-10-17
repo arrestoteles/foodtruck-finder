@@ -25,7 +25,7 @@ router.delete('/:_id', function (req, res, next) {
 
 // Delete all
 router.delete('/', function (req, res, next) {
-    Dish.remove({}, function (err, dishes) {
+    Dish.deleteMany({}, function (err, dishes) {
         if (err) { return next(err); }
         if (dishes == null) {
             return res.status(404).json({ "message": "dish not found" });
