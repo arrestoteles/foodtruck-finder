@@ -4,33 +4,35 @@
       <b-col cols="3"></b-col>
       <b-col cols="6">
         <div class="container">
-          <form
-            class="search-bar"
-          >
-            <input v-model="text" placeholder="search any foodtruck..." name="q" />
+          <form class="search-bar">
+            <input
+              v-model="text"
+              placeholder="search any foodtruck..."
+              name="q"
+            />
           </form>
         </div>
-          <b-row>
-           <b-col cols="12">
-        <b-form-input
-          class="form"
-          v-model="foodtruck_name"
-          placeholder="Enter foodtruck name here"
-          v-bind:b-button-toolbar="createfoodtruck"
-        ></b-form-input>
-           </b-col>
-          </b-row>
+        <b-row>
+          <b-col cols="12">
+            <b-form-input
+              class="form"
+              v-model="foodtruck_name"
+              placeholder="Enter foodtruck name here"
+              v-bind:b-button-toolbar="createfoodtruck"
+            ></b-form-input>
+          </b-col>
+        </b-row>
       </b-col>
-      <b-col cols="12" >
+      <b-col cols="12">
         <div class="containerbutton">
-      <b-button  pill variant="success" @click="createfoodtruck">
-        Create new foodtruck
-      </b-button>
+          <b-button pill variant="success" @click="createfoodtruck">
+            Create new foodtruck
+          </b-button>
         </div>
-         <div>
-      <b-button  pill variant="success" @click="updatefoodtruck">
-        Edit foodtruck
-      </b-button>
+        <div>
+          <b-button pill variant="success" @click="updatefoodtruck">
+            Edit foodtruck
+          </b-button>
         </div>
       </b-col>
     </b-row>
@@ -43,7 +45,7 @@
         md="4"
       >
         <foodtruck-item
-        v-if="foodtruck.name === text"
+          v-if="foodtruck.name === text || text == ''"
           v-bind:foodtruck="foodtruck"
           v-on:del-foodtruck="deletefoodtruck"
           v-on:update-foodtruck="updatefoodtruck"
@@ -171,7 +173,7 @@ export default {
   background: lightgray;
   cursor: pointer;
 }
-.containerbutton{
+.containerbutton {
   min-height: 5%;
   padding: 5%;
 }
