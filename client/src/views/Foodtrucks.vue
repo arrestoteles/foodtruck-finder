@@ -1,38 +1,41 @@
 <template>
   <body>
     <b-container>
+      <b-row>
+        <b-col cols="12">
+          <h1 class="header1">Foodtrucks</h1>
 
-    <b-row>
-      <b-col cols="12">
-        <h1 class="header1">Foodtrucks</h1>
-
-        <div class="container">
-          <form
-            class="search-bar"
-          >
-            <input v-model="text" placeholder="search any foodtruck" name="q" />
-            <button type="submit" @click="searching">
-              <img
-                src="https://img.icons8.com/color/20/FA5252/search--v1.png"
+          <div class="container">
+            <form class="search-bar">
+              <input
+                v-model="text"
+                placeholder="search any foodtruck"
+                name="q"
               />
-            </button>
-          </form>
-        </div>
+              <button type="submit" @click="searching">
+                <img
+                  src="https://img.icons8.com/color/20/FA5252/search--v1.png"
+                />
+              </button>
+            </form>
+          </div>
         </b-col>
-    </b-row>
-
-          <b-row>
-      <b-col sm="12" md="6" lg="4"
-        v-for="foodtruck in foodtrucks"
-        v-bind:key="foodtruck._id"
-      >
+      </b-row>
+      <b-row>
+        <b-col
+          sm="12"
+          md="6"
+          lg="4"
+          v-for="foodtruck in foodtrucks"
+          v-bind:key="foodtruck._id"
+        >
           <component-food
-          v-if="foodtruck.name === text"
-           v-bind:foodtruck="foodtruck"
+            v-if="foodtruck.name === text || text == ''"
+            v-bind:foodtruck="foodtruck"
           />
-           </b-col>
-        </b-row>
-</b-container>
+        </b-col>
+      </b-row>
+    </b-container>
   </body>
 </template>
 
