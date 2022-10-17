@@ -7,6 +7,7 @@ const auth = require('../middleware/auth')
 var Foodtruck = require('../models/foodtruck');
 const customer = require('../models/customer');
 const mongoose = require('mongoose');
+const foodtruck = require('../models/foodtruck');
 
 // Return a list of all customers
 router.get('/', function (req, res, next) {
@@ -23,7 +24,6 @@ router.get('/:customer_id/foodtrucks', function (req, res, next) {
   const customerId = req.params.customer_id
   Customer.findById(customerId).populate('foodtrucks').exec(function (err, customer) {
     if (err) return next(err)
-    console.log(customer);
     res.status(200).json(customer)
   });
 })
@@ -47,7 +47,6 @@ router.post('/:customer_id/foodtrucks', function (req, res, next) {
 
       customer.foodtrucks.push(foodtruck)
       customer.save()
-      console.log(customer.foodtrucks)
       res.status(201).json(foodtruck)
     })
   })
@@ -75,10 +74,10 @@ router.delete('/:customer_id/foodtrucks/:foodtruck_id', function (req, res) {
   try {
     const customerId = req.params.customer_id
     const foodtruckId = req.params.foodtruck_id
-    Customer.findById(customerId).populate('foodtrucks').exec(function (err, next) {
-      if (err) return next(err);
+    Customer.findByIdAndUpdate(customerId).populate('foodtrucks').exec(function (err, customer, next) {
+      if (err) return next(err)
       Foodtruck.findByIdAndDelete(foodtruckId, function (err, next) {
-        if (err) return next(err);
+        if (err) return next(err)
         res.status(204).json({"message": "foodtruck deleted: " + foodtruckId})
       }
     )
