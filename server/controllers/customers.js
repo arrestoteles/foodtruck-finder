@@ -19,11 +19,14 @@ router.get('/', function (req, res, next) {
 })
 
 // Return all foodtrucks for a specific customer given the ID
-router.get('/:id/foodtrucks', function (req, res, next) {
-  var customerId = req.params.id
-  Customer.findOne({ customerId }).exec(function (err, customer) {
-    if (err) return handleError(err);
-    res.status(200).json(customer)
+router.get('/:customer_id/foodtrucks', function (req, res, next) {
+  const customerId = req.params.customer_id
+  console.log(customerId);
+  Customer.findById(customerId, function (err, customer) {
+    if (err) return next(err);
+    console.log("kladdkaka123")
+    console.log(customer);
+    res.status(200).json(customer);
   })
 })
 
@@ -54,13 +57,21 @@ router.post('/:id/foodtrucks', function (req, res, next) {
 })
 
 // Return a specific foodtruck from a specific customer, given the ID(s)
-router.get('/:id/foodtrucks/:id', function (req, res) {
-  console.log(req.body)
-  Customer.findById(customerId).populate('foodtrucks').exec(function (err, customer) {
-    if (err) return handleError(err);
-    Foodtruck.deleteOne({ foodtruckId })
-    res.status(204).json()
+router.get('/:customer_id/foodtrucks/:foodtruck_id', function (req, res) {
+  try {
+    const customerId = req.params.customer_id
+    const foodtruckId = req.params.foodtruck_id
+    Customer.findById(customerId).populate('foodtrucks').exec(function (err) {
+      if (err) return handleError(err);
+      Foodtruck.findById(foodtruckId, function (err, foodtruck) {
+        if (err) return handleError(err);
+        res.status(200).json(foodtruck)
+      }
+    )
   })
+  } catch (err) {
+    res.status(500).json({"message": "something went wrong"})
+  }
 })
 
 // Delete a specific foodtruck from a specific customer, given the ID(s)
