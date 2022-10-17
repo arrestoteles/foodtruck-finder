@@ -21,23 +21,20 @@ router.get('/', function (req, res, next) {
 // Return all foodtrucks for a specific customer given the ID
 router.get('/:customer_id/foodtrucks', function (req, res, next) {
   const customerId = req.params.customer_id
-  console.log(customerId);
-  Customer.findById(customerId, function (err, customer) {
-    if (err) return next(err);
-    console.log("kladdkaka123")
+  Customer.findById(customerId).populate('foodtrucks').exec(function (err, customer) {
+    if (err) return next(err)
     console.log(customer);
-    res.status(200).json(customer);
-  })
+    res.status(200).json(customer)
+  });
 })
 
 // Create a foodtruck for a specific customer given the ID
-router.post('/:id/foodtrucks', function (req, res, next) {
-  const customerId = req.params.id
+router.post('/:customer_id/foodtrucks', function (req, res, next) {
+  const customerId = req.params.customer_id
 
-  Customer.findOne({ _id: customerId }, function(error, customer) {
-    customer.save(function (err) {
-      if (err) return handleError(err);
-    
+  Customer.findById(customerId, function(err, customer) {
+      if (err) return next(err);
+  
       const { name, color } = req.body
       const foodtruck = new Foodtruck({
         name,
@@ -54,7 +51,6 @@ router.post('/:id/foodtrucks', function (req, res, next) {
       res.status(201).json(foodtruck)
     })
   })
-})
 
 // Return a specific foodtruck from a specific customer, given the ID(s)
 router.get('/:customer_id/foodtrucks/:foodtruck_id', function (req, res) {
@@ -75,13 +71,21 @@ router.get('/:customer_id/foodtrucks/:foodtruck_id', function (req, res) {
 })
 
 // Delete a specific foodtruck from a specific customer, given the ID(s)
-router.delete('/:id/foodtrucks/:id', function (req, res, next) {
-  var id = req.params.id
-  Customer.findById(id).populate('favorite').exec(function (err, customer) {
-    if (err) return handleError(err);
-    console.log(`Customer favorite is ${customer.favorite.name}`);
-    res.status(200).json(customer)
+router.delete('/:customer_id/foodtrucks/:foodtruck_id', function (req, res) {
+  try {
+    const customerId = req.params.customer_id
+    const foodtruckId = req.params.foodtruck_id
+    Customer.findById(customerId).populate('foodtrucks').exec(function (err, next) {
+      if (err) return next(err);
+      Foodtruck.findByIdAndDelete(foodtruckId, function (err, next) {
+        if (err) return next(err);
+        res.status(204).json({"message": "foodtruck deleted: " + foodtruckId})
+      }
+    )
   })
+  } catch (err) {
+    res.status(500).json({"message": "something went wrong"})
+  }
 })
 
 // Create a new customer along with validation and encryption
