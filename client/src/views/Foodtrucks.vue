@@ -1,6 +1,6 @@
 <template>
   <body>
-    <b-container>
+    <b-container fluid="md" class="myContainer">
       <b-row>
         <b-col cols="12">
           <h1 class="header1">Foodtrucks</h1>
