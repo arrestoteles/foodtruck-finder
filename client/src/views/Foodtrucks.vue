@@ -1,6 +1,6 @@
 <template>
   <body>
-    <b-container fluid="md" class="myContainer">
+    <b-container fluid="md" class="myContainer1">
       <b-row>
       <b-col cols="12">
       </b-col>
@@ -114,18 +114,20 @@ export default {
 }
 
 body {
-  background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2%27');
   background-repeat: no-repeat;
-  background-color: lightpink;
+  background-color: white;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   overflow: hidden;
-  padding-bottom: 900px;
+  padding-bottom: 600px;
+
 }
-.container {
-  min-height: 100%;
-  padding: 5%;
+.myContainer1 {
+background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2%27');
+opacity:1;
+background-size: cover;
+ background-attachment: fixed;
 }
 .search-bar {
   background: white;
