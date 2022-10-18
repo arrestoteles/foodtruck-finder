@@ -77,7 +77,7 @@ Admin Page: The admin will be able to create and delete customers through this p
 
 ### Entity-Relationship (ER) Diagram
 
-![ER Diagram](./images/er_diagram.png)
+![ER Diagram](./images/updated_er_diagram.png)
 
 ## Teaser (MS3)
 
