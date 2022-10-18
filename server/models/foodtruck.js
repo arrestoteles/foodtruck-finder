@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 
 var foodtruckSchema = new Schema ({
     name: { type: String },
-    category: { type: String },
-    dishes: { type: Schema.Types.ObjectId, ref: 'dishes' },
+    color: { type: String },
+    dishes: [{ type: Schema.Types.ObjectId, ref: 'dishes' }]
 });
 
 
