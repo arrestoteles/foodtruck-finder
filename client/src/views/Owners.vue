@@ -55,7 +55,6 @@
         />
       </b-col>
     </b-row>
-    <b-button @click="() => TogglePopup(buttonTrigger)">Open Popup</b-button>
   </b-container>
 </template>
 
