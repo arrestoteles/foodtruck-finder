@@ -66,13 +66,11 @@
 <script>
 import { Api } from '@/Api'
 import ComponentFoodOwner from '../components/ComponentFoodOwner.vue'
-import Popup from '@/components/Popup.vue'
 
 export default {
   name: 'foodtrucks',
   components: {
-    ComponentFoodOwner,
-    Popup
+    ComponentFoodOwner
   },
   mounted() {
     console.log('Here is a list of all foodtrucks!')
@@ -121,11 +119,6 @@ export default {
       }).then((response) => {
         this.foodtrucks = response.data.foodtrucks
       })
-    },
-    TogglePopup(buttonTrigger) {
-      console.log(buttonTrigger)
-      buttonTrigger = !buttonTrigger
-      console.log(buttonTrigger)
     }
   },
   data() {
