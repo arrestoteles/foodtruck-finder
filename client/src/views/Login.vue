@@ -106,18 +106,16 @@ export default {
   padding-top: 3%;
   background-color: #e6e6e6;
   margin: 0 auto;
-  width: 80%; /* value of your choice which suits your alignment */
+  width: 80%;
 }
 .rolebtn {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 .loginbtn {
   margin-right: 5px;
 }
 .resetbtn {
   margin-left: 5px;
-}
-.rolebtn {
-  margin-bottom: 10px;
 }
 </style>
