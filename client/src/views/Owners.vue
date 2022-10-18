@@ -5,11 +5,11 @@
       <b-col cols="6">
         <div class="container">
           <b-form-input
-          id="search-form"
-          v-model="text"
-          placeholder="search any foodtruck" name="q">
-            <b-button type="submit" @click="searching">
-            </b-button>
+            id="search-form"
+            v-model="text"
+            placeholder="search any foodtruck"
+            name="q"
+          >
           </b-form-input>
         </div>
         <b-row>
@@ -52,6 +52,7 @@
           v-bind:foodtruck="foodtruck"
           v-on:del-foodtruck="deletefoodtruck"
           v-on:update-foodtruck="updatefoodtruck"
+          v-on:create-dish="createdish"
         />
       </b-col>
     </b-row>
@@ -103,15 +104,28 @@ export default {
         this.foodtrucks = response.data.foodtrucks
       })
     },
-    updatefoodtruck(id) {
+    updatefoodtruck(id, newname) {
       setTimeout(function () {
         window.location.reload()
       }, 0)
-      alert('Specify new name of the foodtruck')
+      alert('kladdkaka123')
       Api.patch(`/foodtrucks/${id}`, {
-        name: 'mr robot'
+        name: newname
       }).then((response) => {
         this.foodtrucks = response.data.foodtrucks
+      })
+    },
+    createdish(id, dishname, dishprice) {
+      Api.post('/dishes', {
+        name: dishname,
+        price: dishprice
+      }).then((response) => {
+        this.foodtrucks.forEach((foodtruck) => {
+          if (foodtruck._id === id) {
+            foodtruck.dishes.push(response.data._id)
+            console.log('success')
+          }
+        })
       })
     }
   },
@@ -146,12 +160,12 @@ b-label {
   align-items: center;
 }
 
-.containerbutton{
+.containerbutton {
   min-height: 5%;
   padding: 5%;
 }
-input::placeholder{
-    opacity: 1;
-    color: gray;
+input::placeholder {
+  opacity: 1;
+  color: gray;
 }
 </style>
