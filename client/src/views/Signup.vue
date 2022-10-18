@@ -110,5 +110,12 @@ export default {
   margin: 0 auto;
   width: 80%; /* value of your choice which suits your alignment */
 }
-
+.signupbtn {
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.resetbtn {
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
 </style>

@@ -2,35 +2,38 @@
   <body>
     <b-container fluid="md" class="myContainer1">
       <b-row>
-      <b-col cols="12">
-      </b-col>
+        <b-col cols="12"> </b-col>
       </b-row>
-    <b-row>
-      <b-col cols="12">
-        <div><h1 id="header1">Foodtruck Finder</h1></div>
+      <b-row>
+        <b-col cols="12">
+          <div><h1 id="header1">Food Truck Finder</h1></div>
           <b-form-input
-          class="search-bar"
-          v-model="text"
-          placeholder="search any foodtruck" name="q">
-            <b-button type="submit" @click="searching">
-            </b-button>
+            class="search-bar"
+            v-model="text"
+            placeholder="search any foodtruck"
+            name="q"
+          >
+            <b-button type="submit" @click="searching"> </b-button>
           </b-form-input>
         </b-col>
-    </b-row>
+      </b-row>
 
-        <b-row>
-      <b-col sm="12" md="6" lg="4"
-        v-for="foodtruck in foodtrucks"
-        v-bind:key="foodtruck._id"
-      >
+      <b-row>
+        <b-col
+          sm="12"
+          md="6"
+          lg="4"
+          v-for="foodtruck in foodtrucks"
+          v-bind:key="foodtruck._id"
+        >
           <component-food
             v-if="foodtruck.name === text || text == ''"
             v-bind:foodtruck="foodtruck"
           />
-           </b-col>
-        </b-row>
-</b-container>
-</body>
+        </b-col>
+      </b-row>
+    </b-container>
+  </body>
 </template>
 
 <script>
@@ -136,8 +139,8 @@ background-size: cover;
   padding-bottom: 10px;
 }
 input::placeholder {
-    font-weight: bold;
-    opacity: 0.5;
-    color: gray;
+  font-weight: bold;
+  opacity: 0.5;
+  color: gray;
 }
 </style>
