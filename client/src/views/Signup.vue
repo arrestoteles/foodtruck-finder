@@ -105,4 +105,5 @@ export default {
   margin: 0 auto;
   width: 80%; /* value of your choice which suits your alignment */
 }
+
 </style>
