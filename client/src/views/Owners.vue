@@ -4,13 +4,13 @@
       <b-col cols="3"></b-col>
       <b-col cols="6">
         <div class="container">
-          <form class="search-bar">
-            <input
-              v-model="text"
-              placeholder="search any foodtruck..."
-              name="q"
-            />
-          </form>
+          <b-form-input
+          id="search-form"
+          v-model="text"
+          placeholder="search any foodtruck" name="q">
+            <b-button type="submit" @click="searching">
+            </b-button>
+          </b-form-input>
         </div>
         <b-row>
           <b-col cols="12">
@@ -27,11 +27,6 @@
         <div class="containerbutton">
           <b-button pill variant="success" @click="createfoodtruck">
             Create new foodtruck
-          </b-button>
-        </div>
-        <div>
-          <b-button pill variant="success" @click="updatefoodtruck">
-            Edit foodtruck
           </b-button>
         </div>
       </b-col>
@@ -105,7 +100,7 @@ export default {
       setTimeout(function () {
         window.location.reload()
       }, 0)
-      alert('kladdkaka123')
+      alert('Specify new name of the foodtruck')
       Api.patch(`/foodtrucks/${id}`, {
         name: 'mr robot'
       }).then((response) => {
@@ -130,7 +125,7 @@ export default {
 
 <style>
 .myContainer {
-  background-color: #b0cbd1;
+  background-color: lightblue;
   border: #000000;
 }
 
@@ -142,38 +137,17 @@ export default {
   min-height: 5%;
   padding: 5%;
 }
-.search-bar {
-  max-height: 70%;
+#search-form {
   background: white;
-  display: flex;
   align-items: center;
-  border-radius: 60px;
-  backdrop-filter: blur(4px) saturate(180%);
-  padding: 5px 5px;
-  padding-bottom: 10px;
 }
-.search-bar input {
-  background: transparent;
-  flex: 1;
-  border: 0;
-  outline: none;
-  padding: 5px 20px;
-  font-size: 15px;
-  color: black;
-}
-::placeholder {
-  color: gray;
-}
-.search-bar button {
-  border: 0;
-  border-radius: 50%;
-  width: 35px;
-  height: 33px;
-  background: lightgray;
-  cursor: pointer;
-}
-.containerbutton {
+
+.containerbutton{
   min-height: 5%;
   padding: 5%;
+}
+input::placeholder{
+    opacity: 1;
+    color: gray;
 }
 </style>
