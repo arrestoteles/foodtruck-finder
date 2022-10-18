@@ -8,70 +8,21 @@
       />
       <div class="card-body">
         <div class="card-title">{{ foodtruck.name }}</div>
-        <div class="card-text">Dishes:</div>
-        <div>{{ foodtruck.dishes }}</div>
-        <b-row>
-          <b-col cols="9">
-            <b-input
-              v-model="FoodtruckName"
-              placeholder="Change name of foodtruck here..."
-            >
-            </b-input>
-          </b-col>
-          <b-col cols="0"></b-col>
-          <b-col cols="3">
-            <b-button
-              class="sidebutton"
-              pill
-              variant="success"
-              v-on:click="
-                $emit('update-foodtruck', foodtruck._id, FoodtruckName)
-              "
-            ></b-button>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="7" id="dishtext">Create new dish:</b-col>
-          <b-col cols="2"></b-col>
-          <b-col cols="3"></b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="9">
-            <b-input v-model="dishname" placeholder="Dish name..."> </b-input>
-          </b-col>
-          <b-col cols="0"></b-col>
-          <b-col cols="3"></b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="9">
-            <b-input v-model="dishprice" placeholder="Dish price..."> </b-input>
-          </b-col>
-          <b-col cols="0"></b-col>
-          <b-col cols="3">
-            <b-button
-              class="sidebutton"
-              pill
-              variant="success"
-              v-on:click="
-                $emit('create-dish', foodtruck._id, dishname, dishprice)
-              "
-            >
-            </b-button>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="0"></b-col>
-          <b-col cols="12">
-            <b-button
-              class="deletebtn"
-              pill
-              variant="danger"
-              v-on:click="$emit('del-foodtruck', foodtruck._id)"
-              >Delete Foodtruck</b-button
-            >
-          </b-col>
-          <b-col cols="0"></b-col>
-        </b-row>
+        <div class="card-text">Dishes:{{ foodtruck.dishes }}</div>
+        <b-button
+          class="deletebtn"
+          pill
+          variant="danger"
+          v-on:click="$emit('del-foodtruck', foodtruck._id)"
+          >Delete</b-button
+        >
+        <b-button
+          class="updatebtn"
+          pill
+          variant="primary"
+          v-on:click="$emit('update-foodtruck', foodtruck._id)"
+          >Update</b-button
+        >
       </div>
     </div>
   </div>
@@ -103,23 +54,5 @@ export default {
 
 .container {
   width: 18rem;
-}
-
-input::placeholder {
-  font-size: 8px;
-  font-weight: bolder;
-}
-.sidebutton {
-  padding-right: 10px;
-  padding-left: 20px;
-  width: 50px;
-  height: 33px;
-}
-.deletebtn {
-  margin-top: 10px;
-}
-#dishtext {
-  padding-top: 10px;
-  font-size: 14px;
 }
 </style>
