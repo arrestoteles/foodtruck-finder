@@ -56,10 +56,6 @@
       </b-col>
     </b-row>
     <b-button @click="() => TogglePopup(buttonTrigger)">Open Popup</b-button>
-
-    <Popup v-if="buttonTrigger" v-on:TogglePopup="TogglePopup">
-      <h2>Hi</h2>
-    </Popup>
   </b-container>
 </template>
 
@@ -123,7 +119,6 @@ export default {
   },
   data() {
     return {
-      buttonTrigger: false,
       foodtrucks: [],
       text: ''
     }
