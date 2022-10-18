@@ -1,39 +1,36 @@
 <template>
-  <body>
+<body>
     <b-container>
       <b-row>
-        <b-col cols="12"> </b-col>
+      <b-col cols="12">
+      </b-col>
       </b-row>
-      <b-row>
-        <b-col cols="12">
-          <div><h1 id="header1">Foodtruck Finder</h1></div>
+    <b-row>
+      <b-col cols="12">
+        <div><h1 id="header1">Foodtruck Finder</h1></div>
           <b-form-input
-            class="search-bar"
-            v-model="searchtext"
-            placeholder="search any foodtruck"
-            name="q"
-          >
-            <b-button type="submit"> </b-button>
+          class="search-bar"
+          v-model="text"
+          placeholder="search any foodtruck" name="q">
+            <b-button type="submit" @click="searching">
+            </b-button>
           </b-form-input>
         </b-col>
-      </b-row>
+    </b-row>
 
-      <b-row>
-        <b-col
-          sm="12"
-          md="6"
-          lg="4"
-          v-for="foodtruck in foodtrucks"
-          v-bind:key="foodtruck._id"
-        >
+        <b-row>
+      <b-col sm="12" md="6" lg="4"
+        v-for="foodtruck in foodtrucks"
+        v-bind:key="foodtruck._id"
+      >
           <component-food
-            v-if="foodtruck.name === searchtext || searchtext == ''"
+            v-if="foodtruck.name === text || text == ''"
             v-bind:foodtruck="foodtruck"
           />
-        </b-col>
-      </b-row>
-    </b-container>
-  </body>
+           </b-col>
+        </b-row>
+</b-container>
+</body>
 </template>
 
 <script>
@@ -91,11 +88,18 @@ export default {
       }).then((response) => {
         this.foodtrucks = response.data.foodtrucks
       })
+    },
+    searching(text) {
+      Api.get(`/foodtrucks?name=${this.text}`).then((response) => {
+        console.log(response)
+        this.foodtrucks = response.data.foodtrucks
+      })
     }
   },
   data() {
     return {
-      foodtrucks: []
+      foodtrucks: [],
+      text: ''
     }
   }
 }
@@ -131,8 +135,8 @@ body {
   padding-bottom: 10px;
 }
 input::placeholder {
-  font-weight: bold;
-  opacity: 0.5;
-  color: gray;
+    font-weight: bold;
+    opacity: 0.5;
+    color: gray;
 }
 </style>
