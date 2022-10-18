@@ -3,7 +3,7 @@
     <b-row>
       <b-col cols="3"></b-col>
       <b-col cols="6">
-        <div class="container">
+        <b-row id="toprow">
           <b-form-input
             id="search-form"
             v-model="text"
@@ -11,7 +11,7 @@
             name="q"
           >
           </b-form-input>
-        </div>
+        </b-row>
         <b-row>
           <b-col cols="7">
             <b-form-input
@@ -153,7 +153,6 @@ b-label {
   background: white;
   align-items: center;
 }
-
 .containerbutton {
   min-height: 5%;
   padding: 5%;
