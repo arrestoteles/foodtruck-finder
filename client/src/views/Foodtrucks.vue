@@ -56,9 +56,6 @@ export default {
         console.log(error)
         //   TODO: display some error message instead of logging to console
       })
-      .then(() => {
-        console.log('This runs every time after success or error.')
-      })
   },
   methods: {
     deletefoodtruck(id) {
@@ -76,8 +73,7 @@ export default {
         window.location.reload()
       }, 0)
       Api.post('/foodtrucks', {
-        name: this.foodtruck_name,
-        color: 'blue'
+        name: this.foodtruck_name
       }).then((response) => {
         this.foodtrucks = response.data.foodtrucks
       })

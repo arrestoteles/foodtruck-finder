@@ -29,6 +29,14 @@
             Create new foodtruck
           </b-button>
         </div>
+        <div>
+          <b-button pill variant="success" @click="updatefoodtruck">
+            Edit foodtruck
+          </b-button>
+        </div>
+        <div>
+          <b-label> Owned foodtrucks:</b-label>
+        </div>
       </b-col>
     </b-row>
     <b-row>
@@ -37,9 +45,9 @@
         v-bind:key="foodtruck._id"
         cols="12"
         sm="6"
-        md="4"
+        lg="4"
       >
-        <foodtruck-item
+        <ComponentFoodOwner
           v-if="foodtruck.name === text || text == ''"
           v-bind:foodtruck="foodtruck"
           v-on:del-foodtruck="deletefoodtruck"
@@ -51,13 +59,13 @@
 </template>
 
 <script>
-import FoodtruckItem from '../components/FoodtruckItem.vue'
 import { Api } from '@/Api'
+import ComponentFoodOwner from '../components/ComponentFoodOwner.vue'
 
 export default {
   name: 'foodtrucks',
   components: {
-    'foodtruck-item': FoodtruckItem
+    ComponentFoodOwner
   },
   mounted() {
     console.log('Here is a list of all foodtrucks!')
@@ -90,8 +98,7 @@ export default {
         window.location.reload()
       }, 0)
       Api.post('/foodtrucks', {
-        name: this.foodtruck_name,
-        color: 'blue'
+        name: this.foodtruck_name
       }).then((response) => {
         this.foodtrucks = response.data.foodtrucks
       })
@@ -104,12 +111,6 @@ export default {
       Api.patch(`/foodtrucks/${id}`, {
         name: 'mr robot'
       }).then((response) => {
-        this.foodtrucks = response.data.foodtrucks
-      })
-    },
-    searching(text) {
-      Api.get(`/foodtrucks?name=${this.text}`).then((response) => {
-        console.log(response)
         this.foodtrucks = response.data.foodtrucks
       })
     }
@@ -127,6 +128,9 @@ export default {
 .myContainer {
   background-color: lightblue;
   border: #000000;
+}
+b-label {
+  font-weight: bold;
 }
 
 .button {
