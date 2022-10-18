@@ -7,7 +7,7 @@
       </b-row>
     <b-row>
       <b-col cols="12">
-        <div><h1 id="header1">Foodtrucks</h1></div>
+        <div><h1 id="header1">Foodtruck Finder</h1></div>
           <b-form-input
           class="search-bar"
           v-model="text"
