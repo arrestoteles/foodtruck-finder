@@ -13,7 +13,7 @@
           </b-form-input>
         </div>
         <b-row>
-          <b-col cols="12">
+          <b-col cols="7">
             <b-form-input
               class="form"
               v-model="foodtruck_name"
@@ -21,21 +21,16 @@
               v-bind:b-button-toolbar="createfoodtruck"
             ></b-form-input>
           </b-col>
+          <b-col cols="5">
+            <b-button pill variant="success" @click="createfoodtruck">
+              Create new foodtruck
+            </b-button>
+          </b-col>
         </b-row>
       </b-col>
       <b-col cols="12">
-        <div class="containerbutton">
-          <b-button pill variant="success" @click="createfoodtruck">
-            Create new foodtruck
-          </b-button>
-        </div>
         <div>
-          <b-button pill variant="success" @click="updatefoodtruck">
-            Edit foodtruck
-          </b-button>
-        </div>
-        <div>
-          <b-label> Owned foodtrucks:</b-label>
+          <b-label> All foodtrucks:</b-label>
         </div>
       </b-col>
     </b-row>
