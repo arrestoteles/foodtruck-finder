@@ -80,7 +80,7 @@ router.patch('/:_id', function (req, res, next) {
             return res.status(404).json({ "message": "foodtrucks not found" });
         }
         foodtrucks.name = (req.body.name || foodtrucks.name);
-        foodtrucks.color = (req.body.color || foodtrucks.color);
+        foodtrucks.category = (req.body.category || foodtrucks.category);
         foodtrucks.save();
         res.status(200).json(foodtrucks)
     });
@@ -104,7 +104,7 @@ router.put('/:id', function (req, res, next) {
             return res.status(404).json({ "message": "foodtruck not found" });
         }
         foodtrucks.name = req.body.name
-        foodtrucks.password = req.body.password
+        foodtrucks.category = req.body.category
         foodtrucks.save();
         res.status(200).json(foodtrucks)
     });
