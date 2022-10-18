@@ -4,13 +4,13 @@
       <b-col cols="3"></b-col>
       <b-col cols="6">
         <div class="container">
-          <form class="search-bar">
-            <input
-              v-model="text"
-              placeholder="search any foodtruck..."
-              name="q"
-            />
-          </form>
+          <b-form-input
+          id="search-form"
+          v-model="text"
+          placeholder="search any foodtruck" name="q">
+            <b-button type="submit" @click="searching">
+            </b-button>
+          </b-form-input>
         </div>
         <b-row>
           <b-col cols="12">
@@ -77,7 +77,6 @@ export default {
       .catch((error) => {
         this.foodtrucks = []
         console.log(error)
-        //   TODO: display some error message instead of logging to console
       })
       .then(() => {
         console.log('This runs every time after success or error.')
@@ -94,7 +93,7 @@ export default {
       })
       // TODO: catch error
     },
-    createfoodtruck(id) {
+    createfoodtruck() {
       setTimeout(function () {
         window.location.reload()
       }, 0)
@@ -108,7 +107,7 @@ export default {
       setTimeout(function () {
         window.location.reload()
       }, 0)
-      alert('kladdkaka123')
+      alert('Specify new name of the foodtruck')
       Api.patch(`/foodtrucks/${id}`, {
         name: 'mr robot'
       }).then((response) => {
@@ -127,7 +126,7 @@ export default {
 
 <style>
 .myContainer {
-  background-color: #b0cbd1;
+  background-color: lightblue;
   border: #000000;
 }
 b-label {
@@ -142,27 +141,17 @@ b-label {
   min-height: 5%;
   padding: 5%;
 }
-.search-bar {
-  max-height: 70%;
+#search-form {
   background: white;
-  display: flex;
   align-items: center;
-  border-radius: 60px;
-  backdrop-filter: blur(4px) saturate(180%);
-  padding: 5px 5px;
-  padding-bottom: 10px;
 }
-.search-bar input {
-  background: transparent;
-  flex: 1;
-  border: 0;
-  outline: none;
-  padding: 5px 20px;
-  font-size: 15px;
-  color: black;
-}
-.containerbutton {
+
+.containerbutton{
   min-height: 5%;
   padding: 5%;
+}
+input::placeholder{
+    opacity: 1;
+    color: gray;
 }
 </style>

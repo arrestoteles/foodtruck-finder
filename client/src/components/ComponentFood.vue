@@ -4,7 +4,7 @@
  <img src="https://thumbs.dreamstime.com/b/homemade-burger-fried-potatoes-french-fries-fast-food-set-delicious-fresh-tomatoes-lettuce-onions-cheese-rustic-wooden-table-93980191.jpg" class="card-img-top" alt="...">
   <div class="card-body">
      <div class="card-title">{{ foodtruck.name }}</div>
-      <div class="card-text">Dishes: </div>
+      <div id="card-text">Dishes: </div>
 </div>
    </div>
    </div>
@@ -38,5 +38,7 @@ export default {
  .container{
   width: 18rem
  }
-
+#card-text {
+font: 1em sans-serif;
+}
  </style>

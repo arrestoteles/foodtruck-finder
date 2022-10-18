@@ -61,13 +61,19 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-The purpose of the application is to connect food truckers and food lovers. Today, there’s no solution where a consumer can go online and find where their favorite food truck is located in Göteborg. That’s where we come into play. The consumer should be able to search for available food trucks in the city and see their locations. From the other perspective, we want to enable food truck owners to post their location in the application, so that they can communicate their whereabouts to the consumers. We also aim to digitalize the location application process between the municipality and the food truck owner.
+The purpose of the application is to connect food truckers and food lovers. Today, there’s no solution where a consumer can go online and find their favorite food truck in Göteborg. That’s where we come into play. The consumer should be able to search for available food trucks in the city and see what dishes they have. From the other perspective, we want to enable food truck owners to be able to create their own foodtruck profile in the application, so that they can be easily visible to the consumers via the application. 
 
 ### Pages
 
-Home Page: The home page will display the map of the city and also small truck symbols, showing the location of the food truck. The map will also display my current location as a small dot. As a consumer I will be able to search for a specific food truck in the search bar. The map will be interactive where the user can drag, zoom and click for more information. The home page will also display a list with summarized information about the food trucks.
+Home Page: The food truck page will display information about the food truck. The information will consist of menus consisting of dishes and prices.
 
-Food Truck Page: The food truck page will display information about the food truck. The information will consist of menus and prices, ingredients, story about the food truck and/or owner, ratings, comments etc. If I login as an owner, I will also be able to edit the information about my food truck and also link my social media.
+Sign-up Page: The new users can would be able to sign-up to the application through this page.
+
+Login Page: The customers who have already signed up can login to the application by entering their e-mail and password.
+
+Owner Page: The owners will be able to edit the information about their food truck.
+
+Admin Page: The admin will be able to create and delete customers through this page.
 
 ### Entity-Relationship (ER) Diagram
 
