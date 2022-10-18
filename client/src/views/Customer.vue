@@ -1,12 +1,5 @@
 <template>
   <div class="overflow-auto">
-    <div :style="image"></div>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="my-table"
-    ></b-pagination>
     <b-form
       class="col-12 col-md-4"
       @submit.prevent="onSubmit"
@@ -47,6 +40,16 @@
       :current-page="currentPage"
       small
     ></b-table>
+
+    <div class="mt-3">
+      <b-pagination
+        align="center"
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="my-table"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 
@@ -141,7 +144,7 @@ export default {
   padding-top: 3%;
   background-color: #6044ff;
   margin: 0 auto;
-  width: 80%; /* value of your choice which suits your alignment */
+  width: 80%;
 }
 .addbtn {
   margin-right: 5px;
