@@ -108,7 +108,6 @@ export default {
       setTimeout(function () {
         window.location.reload()
       }, 0)
-      alert('kladdkaka123')
       Api.patch(`/foodtrucks/${id}`, {
         name: newname
       }).then((response) => {
