@@ -17,15 +17,15 @@ export default {
 }
 </script>
 
- <style scoped>
-   @media screen and (max-width: 767px) {
-    .detail {
+<style scoped>
+@media screen and (max-width: 767px) {
+  .detail {
     display: none;
   }
 }
 
 @media screen and (max-width: 767px) {
-   .more-info {
+  .more-info {
     color: rgb(0, 0, 0);
   }
 }

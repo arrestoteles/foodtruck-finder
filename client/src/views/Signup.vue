@@ -87,6 +87,7 @@ export default {
     },
 
     async onReset() {
+      alert('ever going here?')
       // Reset our form values
       this.form.first_name = ''
       this.form.last_name = ''
@@ -105,7 +106,7 @@ export default {
 <style scoped>
 .col-12 {
   padding-top: 3%;
-  background-color: #bedcdc;
+  background-color: #dde8e8;
   margin: 0 auto;
   width: 80%; /* value of your choice which suits your alignment */
 }

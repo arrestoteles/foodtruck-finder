@@ -104,7 +104,7 @@ export default {
 <style scoped>
 .col-12 {
   padding-top: 3%;
-  background-color: #fff8f0;
+  background-color: #e6e6e6;
   margin: 0 auto;
   width: 80%; /* value of your choice which suits your alignment */
 }

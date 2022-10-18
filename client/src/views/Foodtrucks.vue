@@ -1,6 +1,6 @@
 <template>
-<body>
-    <b-container>
+  <body>
+    <b-container fluid="md" class="myContainer">
       <b-row>
       <b-col cols="12">
       </b-col>
