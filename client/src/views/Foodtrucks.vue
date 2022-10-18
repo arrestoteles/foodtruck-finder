@@ -120,7 +120,6 @@ body {
   background-position: center;
   background-attachment: fixed;
   overflow: hidden;
-  padding-bottom: 600px;
 
 }
 .myContainer1 {
