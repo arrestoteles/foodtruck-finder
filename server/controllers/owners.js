@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Owner = require('../models/owner');
+var Foodtruck = require('../models/foodtruck');
+
 
 // Return all foodtrucks for a specific owner given the ID
 router.get('/:id/foodtrucks', function (req, res, next) {
@@ -98,4 +100,25 @@ router.patch('/:id', function (req, res, next) {
   });
 });
 
+// Create foodtruck for owner by ID
+router.post('/:owner_id/foodtrucks', function (req, res, next) {
+  const ownerId = req.params.owner_id
+
+  Owner.findById(ownerId, function(err, owner) {
+      if (err) return next(err);
+  
+      const { name } = req.body
+      const foodtruck = new Foodtruck({
+        name
+      })
+    
+      foodtruck.save(function (err) {
+        if (err) return handleError(err);
+      })
+
+      owner.foodtrucks.push(foodtruck)
+      owner.save()
+      res.status(201).json(foodtruck)
+    })
+  })
 module.exports = router

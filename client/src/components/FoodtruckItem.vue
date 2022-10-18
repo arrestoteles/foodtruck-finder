@@ -1,9 +1,6 @@
 <template>
   <div class="foodtruck">
-    <b-avatar variant="dark"></b-avatar>
     <div class="detail">Foodtruck name: {{ foodtruck.name }}</div>
-    <div class="detail">Foodtruck color: {{ foodtruck.color }}</div>
-    <div class="detail">id: {{ foodtruck._id }}</div>
     <b-button
       class="deletebtn"
       pill
@@ -29,13 +26,13 @@ export default {
 </script>
 
 <style scoped>
-@media  screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .detail {
     display: none;
   }
 }
 
-@media  screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .more-info {
     color: rgb(0, 0, 0);
   }
