@@ -7,7 +7,6 @@ const auth = require('../middleware/auth')
 var Foodtruck = require('../models/foodtruck');
 const customer = require('../models/customer');
 const mongoose = require('mongoose');
-const foodtruck = require('../models/foodtruck');
 
 // Return a list of all customers
 router.get('/', function (req, res, next) {
@@ -35,10 +34,9 @@ router.post('/:customer_id/foodtrucks', function (req, res, next) {
   Customer.findById(customerId, function(err, customer) {
       if (err) return next(err);
   
-      const { name, color } = req.body
+      const { name } = req.body
       const foodtruck = new Foodtruck({
-        name,
-        color
+        name
       })
     
       foodtruck.save(function (err) {

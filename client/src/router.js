@@ -48,8 +48,8 @@ export default new Router({
       component: Signup
     },
     {
-      path: '/owners',
-      name: 'owners',
+      path: '/owner',
+      name: 'owner',
       component: Owner
     },
     {

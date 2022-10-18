@@ -2,41 +2,35 @@
   <body>
     <b-container fluid="md" class="myContainer">
       <b-row>
-        <b-col cols="12">
-          <h1 class="header1">Foodtrucks</h1>
-
-          <div class="container">
-            <form class="search-bar">
-              <input
-                v-model="text"
-                placeholder="search any foodtruck"
-                name="q"
-              />
-              <button type="submit" @click="searching">
-                <img
-                  src="https://img.icons8.com/color/20/FA5252/search--v1.png"
-                />
-              </button>
-            </form>
-          </div>
-        </b-col>
+      <b-col cols="12">
+      </b-col>
       </b-row>
-      <b-row>
-        <b-col
-          sm="12"
-          md="6"
-          lg="4"
-          v-for="foodtruck in foodtrucks"
-          v-bind:key="foodtruck._id"
-        >
+    <b-row>
+      <b-col cols="12">
+        <div><h1 id="header1">Foodtruck Finder</h1></div>
+          <b-form-input
+          class="search-bar"
+          v-model="text"
+          placeholder="search any foodtruck" name="q">
+            <b-button type="submit" @click="searching">
+            </b-button>
+          </b-form-input>
+        </b-col>
+    </b-row>
+
+        <b-row>
+      <b-col sm="12" md="6" lg="4"
+        v-for="foodtruck in foodtrucks"
+        v-bind:key="foodtruck._id"
+      >
           <component-food
             v-if="foodtruck.name === text || text == ''"
             v-bind:foodtruck="foodtruck"
           />
-        </b-col>
-      </b-row>
-    </b-container>
-  </body>
+           </b-col>
+        </b-row>
+</b-container>
+</body>
 </template>
 
 <script>
@@ -62,9 +56,6 @@ export default {
         console.log(error)
         //   TODO: display some error message instead of logging to console
       })
-      .then(() => {
-        console.log('This runs every time after success or error.')
-      })
   },
   methods: {
     deletefoodtruck(id) {
@@ -82,8 +73,7 @@ export default {
         window.location.reload()
       }, 0)
       Api.post('/foodtrucks', {
-        name: this.foodtruck_name,
-        color: 'blue'
+        name: this.foodtruck_name
       }).then((response) => {
         this.foodtrucks = response.data.foodtrucks
       })
@@ -116,10 +106,7 @@ export default {
 </script>
 
 <style scoped>
-.btn_message {
-  margin-bottom: 1em;
-}
-.header1 {
+#header1 {
   font-family: sans-serif;
   text-align: center;
   text-shadow: 2px 2px 10px #05cc16;
@@ -127,48 +114,29 @@ export default {
 }
 
 body {
-  background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
-  background-repeat: repeat;
-  background-color: #45d03b;
+  background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2%27');
+  background-repeat: no-repeat;
+  background-color: lightpink;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  resize: horizontal;
   overflow: hidden;
+  padding-bottom: 900px;
 }
 .container {
   min-height: 100%;
   padding: 5%;
 }
 .search-bar {
-  max-height: 70%;
   background: white;
   display: flex;
   align-items: center;
-  border-radius: 60px;
   backdrop-filter: blur(4px) saturate(180%);
-  padding: 5px 5px;
   padding-bottom: 10px;
 }
-.search-bar input {
-  background: transparent;
-  flex: 1;
-  border: 0;
-  outline: none;
-  padding: 5px 20px;
-  font-size: 15px;
-  color: grey;
-  align-items: center;
-}
-::placeholder {
-  color: gray;
-}
-.search-bar button {
-  border: 0;
-  border-radius: 50%;
-  width: 35px;
-  height: 33px;
-  background: lightgray;
-  cursor: pointer;
+input::placeholder {
+    font-weight: bold;
+    opacity: 0.5;
+    color: gray;
 }
 </style>
