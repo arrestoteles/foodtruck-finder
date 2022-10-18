@@ -4,9 +4,9 @@
     <div class="detail">First name: {{ customer.first_name }}</div>
     <div class="detail">Last name: {{ customer.last_name }}</div>
     <div class="detail">Email: {{ customer.email }}</div>
-    <div class="detail">Password: {{ customer.password }}</div>
-    <div class="detail">id: {{ customer._id }}</div>
-    <div class="detail">Foodtrucks: {{ customer.foodtrucks }}</div>
+    <div class="detail">
+      Favorite Foodtrucks: {{ customer.foodtrucks.name }}
+    </div>
     <b-button
       class="deletebtn"
       pill
@@ -53,5 +53,11 @@ export default {
 
 .customer {
   padding-top: 10%;
+}
+.deletebtn {
+  margin-right: 2px;
+}
+.updatebtn {
+  margin-right: 2px;
 }
 </style>

@@ -1,11 +1,21 @@
 <template>
-  <div>
-    <h1>Customer vue under construction!</h1>
-    <h2>Customer vue under construction!</h2>
-    <h3>Customer vue under construction!</h3>
-    <h4>Customer vue under construction!</h4>
-    <h5>Customer vue under construction!</h5>
-    <h6>Customer vue under construction!</h6>
+  <div class="overflow-auto">
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="my-table"
+    ></b-pagination>
+
+    <p class="mt-3">Current Page: {{ currentPage }}</p>
+
+    <b-table
+      id="my-table"
+      :items="foodtrucks"
+      :per-page="perPage"
+      :current-page="currentPage"
+      small
+    ></b-table>
   </div>
 </template>
 
@@ -13,35 +23,38 @@
 import { Api } from '@/Api'
 
 export default {
-  name: 'customers',
-
   data() {
     return {
-      customers: [],
-      text: ''
+      perPage: 3,
+      currentPage: 1,
+      foodtrucks: []
     }
   },
-
-  methods: {
-    mounted(id) {
-      console.log('Here is a list of all customers!')
-      Api.get(`/customers/${id}`)
-        .then((response) => {
-          console.log(response)
-          this.customers = response.data.customers
-        })
-        .catch((error) => {
-          this.customers = []
-          console.log(error)
-          //   TODO: display some error message instead of logging to console
-        })
-        .then(() => {
-          console.log('This runs every time after success or error.')
-        })
+  computed: {
+    rows() {
+      return this.foodtrucks.length
     }
+  },
+  mounted() {
+    console.log('Here is a list of all your foodtrucks!')
+    console.log('kladdkaka2')
+    const customerId = localStorage.getItem('LoggedUser')
+    const customerID = customerId.slice(1, -1)
+    alert(customerID)
+    Api.get(`/customers/${customerID}/foodtrucks`)
+      .then((response) => {
+        console.log(response)
+        console.log('kladdkaka1')
+        this.foodtrucks = response.data.foodtrucks
+        console.log(this.foodtrucks)
+      })
+      .catch((error) => {
+        this.foodtrucks = []
+        console.log(error)
+      })
+      .then(() => {
+        console.log('This runs every time after success or error.')
+      })
   }
 }
 </script>
-
-<style>
-</style>

@@ -19,18 +19,18 @@ router.delete('/:_id', function (req, res, next) {
         if (dish == null) {
             return res.status(404).json({ "message": "dish not found" });
         }
-        res.json(dish);
+        res.status(204).json(dish);
     });
 });
 
 // Delete all
 router.delete('/', function (req, res, next) {
-    Dish.remove({}, function (err, dishes) {
+    Dish.deleteMany({}, function (err, dishes) {
         if (err) { return next(err); }
         if (dishes == null) {
             return res.status(404).json({ "message": "dish not found" });
         }
-        res.json(dishes);
+        res.status(204).json(dishes);
     });
 });
 
@@ -42,7 +42,7 @@ router.get('/:_id', function (req, res, next) {
         if (dishes == null) {
             return res.status(404).json({ "message": "dish not found" });
         }
-        res.json(dishes);
+        res.status(200).json(dishes);
     });
 });
 
@@ -50,7 +50,7 @@ router.get('/:_id', function (req, res, next) {
 router.get('/', function (req, res, next) {
     Dish.find(function (err, dishes) {
         if (err) { return next(err); }
-        res.json({ "dishes": dishes });
+        res.status(200).json({ "dishes": dishes });
     });
 });
 
@@ -65,7 +65,7 @@ router.put('/:id', function (req, res, next) {
         dishes.name = req.body.name
         dishes.price = req.body.price
         dishes.save();
-        res.status(204).json(dishes)
+        res.status(200).json(dishes)
     });
 });
 
@@ -80,7 +80,7 @@ router.patch('/:id', function (req, res, next) {
         dishes.name = (req.body.name || dishes.name);
         dishes.price = (req.body.price || dishes.price);
         dishes.save();
-        res.status(204).json(dishes)
+        res.status(200).json(dishes)
     });
 });
 

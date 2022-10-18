@@ -24,8 +24,8 @@
         v-bind:key="foodtruck._id"
       >
           <component-food
-          v-if="foodtruck.name === text"
-           v-bind:foodtruck="foodtruck"
+            v-if="foodtruck.name === text || text == ''"
+            v-bind:foodtruck="foodtruck"
           />
            </b-col>
         </b-row>
@@ -143,5 +143,4 @@ input::placeholder {
     opacity: 0.5;
     color: gray;
 }
-
 </style>

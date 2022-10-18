@@ -7,6 +7,7 @@ const auth = require('../middleware/auth')
 var Foodtruck = require('../models/foodtruck');
 const customer = require('../models/customer');
 const mongoose = require('mongoose');
+const foodtruck = require('../models/foodtruck');
 
 // Return a list of all customers
 router.get('/', function (req, res, next) {
@@ -19,58 +20,71 @@ router.get('/', function (req, res, next) {
 })
 
 // Return all foodtrucks for a specific customer given the ID
-router.get('/:id/foodtrucks', function (req, res, next) {
-  var customerId = req.params.id
-  Customer.findOne({ _id: customerId }).exec(function (err, customer) {
-    if (err) return handleError(err);
-    console.log(customer.foodtrucks);
-    res.status(200).json(customer.foodtrucks)
-  })
+router.get('/:customer_id/foodtrucks', function (req, res, next) {
+  const customerId = req.params.customer_id
+  Customer.findById(customerId).populate('foodtrucks').exec(function (err, customer) {
+    if (err) return next(err)
+    res.status(200).json(customer)
+  });
 })
 
 // Create a foodtruck for a specific customer given the ID
-router.post('/:id/foodtrucks', function (req, res, next) {
-  const customerId = req.params.id
+router.post('/:customer_id/foodtrucks', function (req, res, next) {
+  const customerId = req.params.customer_id
 
-  Customer.findOne({ _id: customerId }, function(error, customer) {
-    customer.save(function (err) {
-      if (err) return handleError(err);
-    
+  Customer.findById(customerId, function(err, customer) {
+      if (err) return next(err);
+  
+      const { name, color } = req.body
       const foodtruck = new Foodtruck({
-        name: 'Campanello',
-        color: 'green'
+        name,
+        color
       })
     
       foodtruck.save(function (err) {
         if (err) return handleError(err);
       })
 
-      customer.foodtrucks = foodtruck
+      customer.foodtrucks.push(foodtruck)
       customer.save()
-      console.log(customer.foodtrucks)
-      res.status(201).json({foodtruck})
+      res.status(201).json(foodtruck)
     })
   })
-})
 
 // Return a specific foodtruck from a specific customer, given the ID(s)
-router.get('/:id/foodtrucks/:id', function (req, res, next) {
-  var id = req.params.id
-  Customer.findById(id).populate('foodtrucks').exec(function (err, customer) {
-    if (err) return handleError(err);
-    console.log(`Customer favorite is ${customer.foodtrucks.name}`);
-    res.status(200).json(customer)
+router.get('/:customer_id/foodtrucks/:foodtruck_id', function (req, res) {
+  try {
+    const customerId = req.params.customer_id
+    const foodtruckId = req.params.foodtruck_id
+    Customer.findById(customerId).populate('foodtrucks').exec(function (err) {
+      if (err) return handleError(err);
+      Foodtruck.findById(foodtruckId, function (err, foodtruck) {
+        if (err) return handleError(err);
+        res.status(200).json(foodtruck)
+      }
+    )
   })
+  } catch (err) {
+    res.status(500).json({"message": "something went wrong"})
+  }
 })
 
 // Delete a specific foodtruck from a specific customer, given the ID(s)
-router.delete('/:id/foodtrucks/:id', function (req, res, next) {
-  var id = req.params.id
-  Customer.findById(id).populate('favorite').exec(function (err, customer) {
-    if (err) return handleError(err);
-    console.log(`Customer favorite is ${customer.favorite.name}`);
-    res.status(200).json(customer)
+router.delete('/:customer_id/foodtrucks/:foodtruck_id', function (req, res) {
+  try {
+    const customerId = req.params.customer_id
+    const foodtruckId = req.params.foodtruck_id
+    Customer.findByIdAndUpdate(customerId).populate('foodtrucks').exec(function (err, customer, next) {
+      if (err) return next(err)
+      Foodtruck.findByIdAndDelete(foodtruckId, function (err, next) {
+        if (err) return next(err)
+        res.status(204).json({"message": "foodtruck deleted: " + foodtruckId})
+      }
+    )
   })
+  } catch (err) {
+    res.status(500).json({"message": "something went wrong"})
+  }
 })
 
 // Create a new customer along with validation and encryption
@@ -190,7 +204,7 @@ router.delete('/:id', function (req, res, next) {
     if (customer === null) {
       return res.status(404).json({ message: 'Customer not found' })
     }
-    res.status(200).json(customer)
+    res.status(204).json(customer)
   })
 })
 
@@ -200,7 +214,7 @@ router.delete('/', function(req, res, next) {
     if (err) {
       return next(err)
     }
-    res.status(200).json(customer)
+    res.status(204).json(customer)
   })
 }) 
 
@@ -217,7 +231,7 @@ router.put('/:id', function(req, res, next) {
         customer.email = req.body.email
         customer.password = req.body.password
         customer.save()
-        res.status(204).json(customer)
+        res.status(200).json(customer)
     })
 })
 
@@ -234,7 +248,7 @@ router.patch('/:id', function(req, res, next) {
       customer.email = (req.body.email || customer.email)
       customer.password = (req.body.password || customer.password)
       customer.save()
-      res.status(204).json(customer)
+      res.status(200).json(customer)
   })
 })
 
