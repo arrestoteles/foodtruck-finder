@@ -9,7 +9,6 @@
       <div class="card-body">
         <div class="card-title">{{ foodtruck.name }}</div>
         <div class="card-text">Dishes:</div>
-        <div>{{ foodtruck.dishes }}</div>
         <b-row>
           <b-col cols="9">
             <b-input
