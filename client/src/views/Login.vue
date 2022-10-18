@@ -127,8 +127,4 @@ export default {
   margin: 0 auto;
   width: 80%; /* value of your choice which suits your alignment */
 }
-#input-1, #input-2 {
-  font-size: bold;
-
-}
 </style>
