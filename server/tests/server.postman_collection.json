@@ -1,75 +1,2043 @@
 {
-    "info": {
-        "_postman_id": "f7ee95b5-9cb9-442f-a6a9-42de46138872",
-        "name": "server",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
-        {
-            "name": "GET /api",
-            "event": [
-                {
-                    "listen": "prerequest",
-                    "script": {
-                        "id": "b58d92ec-5214-450c-adb0-28e068aa71b9",
-                        "exec": [
-                            ""
-                        ],
-                        "type": "text/javascript"
-                    }
-                }
-            ],
-            "request": {
-                "method": "GET",
-                "header": [
-                    {
-                        "key": "Accept",
-                        "value": "application/json",
-                        "type": "text"
-                    }
-                ],
-                "url": {
-                    "raw": "{{host}}/api",
-                    "host": [
-                        "{{host}}"
-                    ],
-                    "path": [
-                        "api"
-                    ]
-                }
-            },
-            "response": []
-        }
-    ],
-    "event": [
-        {
-            "listen": "prerequest",
-            "script": {
-                "id": "05864cff-5cba-4070-bac3-a59328954ebf",
-                "type": "text/javascript",
-                "exec": [
-                    ""
-                ]
-            }
-        },
-        {
-            "listen": "test",
-            "script": {
-                "id": "e9c319be-3306-4fc5-ba34-fcf64391213a",
-                "type": "text/javascript",
-                "exec": [
-                    ""
-                ]
-            }
-        }
-    ],
-    "variable": [
-        {
-            "id": "cd185905-a834-4211-8030-583d17702534",
-            "key": "host",
-            "value": "http://localhost:3000",
-            "type": "string"
-        }
-    ],
-    "protocolProfileBehavior": {}
+	"info": {
+		"_postman_id": "f516bd5e-d85c-4bbb-a107-da175e7a9062",
+		"name": "server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19812185"
+	},
+	"item": [
+		{
+			"name": "Create customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct customer response\", function () {",
+							"    pm.expect(jsonData.first_name).to.eql(\"armin\");",
+							"    pm.expect(jsonData.last_name).to.eql(\"balesic\");",
+							"    pm.expect(jsonData.email).to.eql(\"bale\");",
+							"});",
+							"",
+							"pm.globals.set(\"customer_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"first_name\": \"armin\",\n    \"last_name\": \"balesic\",\n    \"email\": \"bale\",\n    \"password\": \"pass\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/customers",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create customer Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct customer response\", function () {",
+							"    pm.expect(jsonData.first_name).to.eql(\"victor\");",
+							"    pm.expect(jsonData.last_name).to.eql(\"campanello\");",
+							"    pm.expect(jsonData.email).to.eql(\"druner\");",
+							"});",
+							"",
+							"pm.globals.set(\"customer_id2\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \n    \"first_name\": \"victor\",\n    \"last_name\": \"campanello\",\n    \"email\": \"druner\",\n    \"password\": \"pass\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/customers",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create dish",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"Pizza\");",
+							"    pm.expect(jsonData.price).to.eql(\"5\");",
+							"});",
+							"",
+							"pm.globals.set(\"dish_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Pizza\",\n    \"price\": \"5\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/dishes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dishes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create dish Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"Hamburger\");",
+							"    pm.expect(jsonData.price).to.eql(\"10\");",
+							"});",
+							"",
+							"pm.globals.set(\"dish_id2\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Hamburger\",\n    \"price\": 10\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/dishes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dishes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create foodtruck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"pizzaTruck\");",
+							"});",
+							"",
+							"pm.globals.set(\"foodtruck_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"pizzaTruck\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/foodtrucks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "victor ",
+							"disabled": true
+						},
+						{
+							"key": "color",
+							"value": "grreen",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create foodtruck Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"hamburgerTruck\");",
+							"});",
+							"",
+							"pm.globals.set(\"foodtruck_id2\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"hamburgerTruck\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/foodtrucks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "victor ",
+							"disabled": true
+						},
+						{
+							"key": "color",
+							"value": "grreen",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a owner",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.username).to.eql(\"labi\");",
+							"    pm.expect(jsonData.password).to.eql(\"1234\");",
+							"});",
+							"",
+							"pm.globals.set(\"owner_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"labi\",\n    \"password\": 1234\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/owners",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"owners"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create owner Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.username).to.eql(\"armin\");",
+							"    pm.expect(jsonData.password).to.eql(\"12345\");",
+							"});",
+							"",
+							"pm.globals.set(\"owner_id2\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"armin\",\n    \"password\": 12345\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/owners",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"owners"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create dish for foodtruck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"Large-Pizza\");",
+							"    pm.expect(jsonData.price).to.eql(\"7\");",
+							"});",
+							"",
+							"pm.globals.set(\"dish_id3\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Large-Pizza\",\n    \"price\": 7\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/foodtrucks/{{foodtruck_id}}/dishes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks",
+						"{{foodtruck_id}}",
+						"dishes"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "victor ",
+							"disabled": true
+						},
+						{
+							"key": "color",
+							"value": "grreen",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create foodtruck for a specific customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"kebabTruck\");",
+							"});",
+							"",
+							"pm.globals.set(\"foodtruck_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"kebabTruck\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id2}}/foodtrucks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id2}}",
+						"foodtrucks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create foodtruck for owner",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.name).to.eql(\"kebabTruck\");",
+							"});",
+							"",
+							"pm.globals.set(\"foodtruck_id\", jsonData._id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"kebabTruck\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id2}}/foodtrucks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id2}}",
+						"foodtrucks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get customer by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    pm.expect(jsonData.first_name).to.eql(\"victor\");",
+							"    pm.expect(jsonData.last_name).to.eql(\"campanello\");",
+							"    pm.expect(jsonData.email).to.eql(\"druner\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id2}}"
+					],
+					"query": [
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dish by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Pizza\");",
+							"    pm.expect(jsonData.price).to.eql(\"5\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/dishes/{{dish_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dishes",
+						"{{dish_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get foodtruck by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"kebabTruck\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/foodtrucks/{{foodtruck_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks",
+						"{{foodtruck_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get owner by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.username).to.eql(\"labi\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/owners/{{owner_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"owners",
+						"{{owner_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct type of object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all dishes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct type of object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/dishes/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dishes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all foodtrucks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/foodtrucks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all owners",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct type of object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/owners",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"owners"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all foodtrucks for a specific customer given the ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct type of object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id2}}/foodtrucks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id2}}",
+						"foodtrucks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a specific foodtruck from a specific customer, given the ID(s)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct type of object\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"object\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id}}/foodtrucks/{{foodtruck_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id}}",
+						"foodtrucks",
+						"{{foodtruck_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put customer by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.first_name).to.eql(\"Elliot\");",
+							"    pm.expect(jsonData.last_name).to.eql(\"Birmingham\");",
+							"    pm.expect(jsonData.email).to.eql(\"playahead\");",
+							"    pm.expect(jsonData.password).to.eql(\"hemglass\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Elliot\",\n    \"last_name\": \"Birmingham\",\n    \"email\": \"playahead\",\n    \"password\": \"hemglass\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put dish by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Large-Hamburger\");",
+							"    pm.expect(jsonData.price).to.eql(\"16\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"Large-Hamburger\",\n    \"price\" : \"16\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/dishes/{{dish_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dishes",
+						"{{dish_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put foodtruck by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"putTruck\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"putTruck\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/foodtrucks/{{foodtruck_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks",
+						"{{foodtruck_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put owner by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"object\");",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"putOwner\",\n    \"password\": \"153\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/owners/{{owner_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"owners",
+						"{{owner_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch customer by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.password).to.eql(\"my-new-password\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\" : \"my-new-password\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch dish by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.price).to.eql(\"11\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"price\" : \"11\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/dishes/{{dish_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dishes",
+						"{{dish_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch foodtruck by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"patchedTruck\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"patchedTruck\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/foodtrucks/{{foodtruck_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks",
+						"{{foodtruck_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch owner by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Correct attributes\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.username).to.eql(\"patchedOwner\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"patchedOwner\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/owners/{{owner_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"owners",
+						"{{owner_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete foodtruck from specific customer by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id2}}/foodtrucks/{{foodtruck_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id2}}",
+						"foodtrucks",
+						"{{foodtruck_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete customer by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/customers/{{customer_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers",
+						"{{customer_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete dish by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"/*",
+							"pm.test(\"Correct name and price of dish\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Large-Hamburger\");",
+							"    pm.expect(jsonData.price).to.eql(\"10\");",
+							"});",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/dishes/{{dish_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dishes",
+						"{{dish_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete foodtrucks by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/foodtrucks/{{foodtruck_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks",
+						"{{foodtruck_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete owner by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"/*",
+							"pm.test(\"Correct customer response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.username).to.be.a(\"string\");",
+							"    pm.expect(jsonData.password).to.be.a(\"string\");",
+							"});",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/owners/{{owner_id2}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"owners",
+						"{{owner_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/customers",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all foodtrucks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/foodtrucks",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"foodtrucks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all dishes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/dishes",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"dishes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all owners",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Correct status code\", function(){",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/owners",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"owners"
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }
